@@ -7,8 +7,11 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import AppHeader from "../../AppHeader";
-import MenuBar from "../../MenuBar";
+import AppHeader from "../../common/AppHeader";
+import DividedLayout from "../../common/DivivedLayout";
+import LeftColumn from "../../common/LeftColumn";
+import RightColumn from "../../common/RightColumn ";
+import MenuBar from "../../common/MenuBar";
 import AddFood from "./AddFood";
 import Profile from "./Profile";
 import Statistics from "./Statistics";
@@ -20,6 +23,11 @@ function MainPage({ children }) {
       <BrowserRouter>
       <AppHeader/>
       <MenuBar/>
+      <DividedLayout>
+        <LeftColumn></LeftColumn>
+        <RightColumn></RightColumn>
+      </DividedLayout>
+
          <Switch>
           <Route path="/add-food" exact component={AddFood} />
           
