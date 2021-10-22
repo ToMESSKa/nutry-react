@@ -1,0 +1,11 @@
+.footer-logo {
+  height: 6vmin;
+  display: inline-block;
+}
+
+.header-img {
+  width: 100%;
+  height: 400px;
+  background: url("../foods.jpg");
+  background-size: cover;
+}
