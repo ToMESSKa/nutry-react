@@ -8,6 +8,7 @@ import {
   Link,
 } from "react-router-dom";
 import MainPage from "./components/routing/main/MainPage";
+import Login from "./components/routing/login/Login";
 
 
 
@@ -17,7 +18,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact render={() => <MainPage />} />
-          <Route />
+          <Route path="/login" exact render={() => <Login />}/>
         </Switch>
       </BrowserRouter>
     </div>
