@@ -1,9 +1,9 @@
 import { Header } from 'antd/lib/layout/layout';
 import { Space,Col } from 'antd';
 
-function RightColumn() {
+function RightColumn({children}) {
     return(
-        <Col span={8}>Right</Col>
+        <Col span={16}>{children}</Col>
     )
 }
 

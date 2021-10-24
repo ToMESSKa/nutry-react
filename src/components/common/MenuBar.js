@@ -12,13 +12,13 @@ function MenuBar() {
     return(
         <div>
         <Menu mode="horizontal">
-        <Menu.Item key="mail">
+        <Menu.Item key="add-food">
         <Link to={'/add-food'} className="nav-link"> Add Food </Link>
         </Menu.Item>
-        <Menu.Item key="app">
+        <Menu.Item key="statistics">
         <Link to={'/statistics'} className="nav-link">Statistics</Link>
         </Menu.Item>
-        <Menu.Item key="app">
+        <Menu.Item key="profilée">
         <Link to={'/profile'} className="profile">Profile</Link>
         </Menu.Item>
         </Menu>

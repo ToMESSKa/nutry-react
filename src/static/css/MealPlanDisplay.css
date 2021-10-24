@@ -1,0 +1,15 @@
+.food-card {
+  height: 50px;
+  width: auto;
+  display: inline-block;
+  align-items: flex-end;
+}
+
+.food-image {
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.calorie-button-rigth {
+  size: 10%;
+}
