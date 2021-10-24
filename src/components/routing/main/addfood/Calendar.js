@@ -3,15 +3,20 @@ import React, { useState, useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-function Calendar({ children }) {
+function Calendar(props) {
 
-const [startDate, setStartDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
 
     return (
-        <DatePicker selected={startDate}
-        onSelect={(date) => {
-         setStartDate(date);
-        }}
+        <DatePicker selected={selectedDate}
+        onSelect={(date)=>{
+            setSelectedDate(date)
+            props.getCurrentDate(date);
+            console.log(selectedDate)
+            console.log(date)
+            }
+        }
         inline
         />
     );

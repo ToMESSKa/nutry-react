@@ -6,32 +6,89 @@ import broccoli from '../../../../static/broccoli.png';
 import healthyfood from '../../../../static/healthyfood.png';
 import junkfood from '../../../../static/junkfood.png';
 import "../../../../static/css/MealPlanDisplay.css";
+import CaloriesBar from "./CaloriesBar";
+import CalorieCounter from "./CalorieCounter";
+import moment from "moment";
 
-function MealPlanDisplay() {
+
+function MealPlanDisplay(props) {
   const [addedFoods, setAddedFoods] = useState([]);
+  const [userData, setUserData] = useState({});
+  const [totalCalories, setTotalCalories] = useState(0);
 
   useEffect(() => {
-    getAddedFoods();
-  }, []);
+    // getAddedFoods();
+    // getUserDetails();
+    handleDateSelect();
+  },[props.selectedDate]);
 
 
 
   const getAddedFoods = () => {
     try {
-      const date = { date: "2021-09-01" };
+      const date = { date: props.selectedDate };
       axios
         .post("http://localhost:8080/updatemealplan", date)
         .then((response) => {
           setAddedFoods(response.data.foods);
-          console.log(response.data.foods);
+          countCalories(response);
         });
     } catch (err) {
       console.log(err);
     }
   };
 
+  const getUserDetails = () => {
+    try {
+      axios.get("http://localhost:8080/getuserdata").then((response) => {
+        console.log(response.data)
+        setUserData(response.data);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const countCalories = (response) => {
+    const totalCalories = response.data.foods.reduce(
+      (total, food) =>
+        (total = total + (food.energy * food.foodConsumed[0].amount) / 100),
+      0
+    );
+    setTotalCalories(totalCalories);
+  };
+
+  const handleDateSelect = () => {
+    console.log(props.selectedDate);
+    const newDate = { date: moment(props.selectedDate).format("YYYY-MM-DD") };
+    try {
+      axios
+        .post("http://localhost:8080/updatemealplan", newDate)
+        .then((response) => {
+          setAddedFoods(response.data.foods);
+          countCalories(response);
+          // setChartCardData(response.data.macroNutrients);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
+    <div className = "food-display">
+      <div>
+          <h1>
+          Recommended calories: {Math.round(userData.recommended, 0)}{" "}kcal
+          </h1>
+        </div>
+        <CaloriesBar
+          recommended={userData.recommended}
+          cal={totalCalories}
+        ></CaloriesBar>
+        <CalorieCounter
+          addedFoodsList={addedFoods}
+          caloriesPassed={Math.round(totalCalories,0)}
+        ></CalorieCounter>
     <div>
       <Row>
       <Col span={3}><b>calorie density</b></Col>
@@ -94,17 +151,8 @@ function MealPlanDisplay() {
                 </button>
               </Col>
             </Row>
-            // <Card key ={food.foodConsumed[0].id} className="food-card">
-            //   <Space direction="vertical">
-            //     <div style={{fontSize:"0.7rem"}}>
-            //   {food.description}
-            //   </div>
-            //   <div>
-            //     Energy: {Math.round((food.energy * food.foodConsumed[0].amount) / 100,0)} kcal{" "}
-            //   </div>
-            //   </Space>
-            // </Card>
           ))}
+    </div>
     </div>
   );
 }
