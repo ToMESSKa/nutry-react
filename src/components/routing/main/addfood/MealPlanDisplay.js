@@ -17,8 +17,8 @@ function MealPlanDisplay(props) {
   const [totalCalories, setTotalCalories] = useState(0);
 
   useEffect(() => {
-    // getAddedFoods();
-    // getUserDetails();
+    getAddedFoods();
+    getUserDetails();
     handleDateSelect();
   },[props.selectedDate]);
 
