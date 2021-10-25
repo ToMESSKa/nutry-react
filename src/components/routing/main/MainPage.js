@@ -1,40 +1,31 @@
-import { Menu, Layout, Row, Col } from "antd";
+import {} from "antd";
 
 import React from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Link,
-} from "react-router-dom";
-import AppHeader from "../../common/AppHeader";
-import DividedLayout from "../../common/DivivedLayout";
-import LeftColumn from "../../common/LeftColumn";
-import RightColumn from "../../common/RightColumn ";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import AppHeader from "../../header/AppHeader";
 import MenuBar from "../../common/MenuBar";
 import AddFood from "./AddFood";
 import Profile from "./Profile";
 import Statistics from "./Statistics";
 
 function MainPage({ children }) {
-  return (
-    <div className="main-page">
-      
-      <BrowserRouter>
-      <AppHeader/>
-      <MenuBar/>
-      <DividedLayout>
-        <LeftColumn></LeftColumn>
-        <RightColumn></RightColumn>
-      </DividedLayout>
 
-         <Switch>
+  const background = {
+    background: "efefef",
+
+  };
+  
+
+  return (
+    <div className="main-page" style={background} >
+      <BrowserRouter>
+        <AppHeader />
+        <MenuBar />
+
+        <Switch>
           <Route path="/add-food" exact component={AddFood} />
-          
           <Route path="/statistics" exact component={Statistics} />
-          
           <Route path="/profile" exact component={Profile} />
-          
         </Switch>
       </BrowserRouter>
 

@@ -1,9 +1,8 @@
-import { Header } from 'antd/lib/layout/layout';
-import { Space, Col } from 'antd';
+import { Col } from 'antd';
 
 function LeftColumn() {
     return(
-        <Col span={8}>Left</Col>
+        <Col flex={2}>Left</Col>
 
     )
 }

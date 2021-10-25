@@ -1,5 +1,3 @@
-import { Header } from 'antd/lib/layout/layout';
-import { Space } from 'antd';
 import "../../static/css/MainPage.css";
 
 function AppHeader() {
