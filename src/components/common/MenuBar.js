@@ -1,30 +1,30 @@
-import { Header } from 'antd/lib/layout/layout';
-import { Menu, Space } from 'antd';
+import { Menu } from "antd";
 import React from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function MenuBar() {
     return(
-        <div>
-        <Menu mode="horizontal">
-        <Menu.Item key="add-food">
-        <Link to={'/add-food'} className="nav-link"> Add Food </Link>
+    <div>
+      <Menu mode="horizontal">
+        <Menu.Item key="addfood">
+          <Link to={"/add-food"} className="nav-link">
+            {" "}
+            Add Food{" "}
+          </Link>
         </Menu.Item>
         <Menu.Item key="statistics">
-        <Link to={'/statistics'} className="nav-link">Statistics</Link>
+          <Link to={"/statistics"} className="nav-link">
+            Statistics
+          </Link>
         </Menu.Item>
-        <Menu.Item key="profilée">
-        <Link to={'/profile'} className="profile">Profile</Link>
+        <Menu.Item key="profile">
+          <Link to={"/profile"} className="profile">
+            Profile
+          </Link>
         </Menu.Item>
-        </Menu>
-          </div>
-    )
+      </Menu>
+    </div>
+  );
 }
 
 export default MenuBar;
-

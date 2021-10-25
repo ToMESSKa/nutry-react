@@ -1,14 +1,12 @@
-import logo from "./logo.svg";
+//import logo from "./logo.svg";
 import React from "react";
 import "./App.css";
 import {
   BrowserRouter,
   Switch,
   Route,
-  Link,
 } from "react-router-dom";
 import MainPage from "./components/routing/main/MainPage";
-
 
 
 function App() {

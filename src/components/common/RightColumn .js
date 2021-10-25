@@ -1,5 +1,4 @@
-import { Header } from 'antd/lib/layout/layout';
-import { Space,Col } from 'antd';
+import { Col } from 'antd';
 
 function RightColumn({children}) {
     return(
