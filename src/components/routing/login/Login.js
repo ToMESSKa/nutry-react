@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Button, Checkbox, Layout } from 'antd';
-import { Carousel, Card } from 'antd';
+import { Form, Input, Button, Layout, Carousel, Card, Row, Col } from 'antd';
 import axios from "axios";
 import AppFooter from "../../footer/AppFooter";
-import { Row, Col } from 'antd';
 import Logo from "../../logo/Logo";
 import Brand from "../../brand/Brand";
+import {Link} from "react-router-dom";
 
 
 
@@ -57,7 +56,12 @@ function Login() {
             <Col span={14} offset={5}>
                 <Row>
               <Col span={12}>
-                  <p>
+                      <Card>
+                          <Row>
+                          <Col span={22} offset={2} style={{height: 60}}>
+                              <h2 align="left">About us:</h2>
+                          </Col>
+                          </Row>
                       <Carousel autoplay>
                           <Card style={{height: 300}}>
                               <h3>Ez egy honlap amit mi csinaltunk Neked</h3>
@@ -68,15 +72,21 @@ function Login() {
                           <Card style={{height: 300}}>
                               <h3>Es meg annal is tobbet a kajak tapanyagairol</h3>
                           </Card>
-                      </Carousel>,
-                  </p>
+                      </Carousel>
+                      </Card>
               </Col>
                 <Col span={12}>
                     <Card>
+                        <Row>
+                            <Col span={22} offset={2} style={{height: 60}}>
+                                <h2 align="left">Please log in!</h2>
+                            </Col>
+                        </Row>
+
               <Form
           name="basic"
-          labelCol={{ span: 10 }}
-          wrapperCol={{ span: 14 }}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -99,12 +109,24 @@ function Login() {
           >
             <Input.Password name="password" />
           </Form.Item>
+                  <Row>
+                      <Col offset={2} span={8}>
+                          <Form.Item >
+                            <Link to="/registration">or Register</Link>
+                          </Form.Item>
+                      </Col>
+                      <Col offset={7} span={2}>
+                          <Form.Item >
+                            <Button type="primary" htmlType="submit" onClick={sendCredentials}>
+                              Submit
+                            </Button>
+                          </Form.Item>
+                      </Col>
+                  </Row>
 
-          <Form.Item wrapperCol={{ offset: 18, span: 4 }}>
-            <Button type="primary" htmlType="submit" onClick={sendCredentials}>
-              Submit
-            </Button>
-          </Form.Item>
+
+
+
         </Form>
                     </Card>
         </Col>
