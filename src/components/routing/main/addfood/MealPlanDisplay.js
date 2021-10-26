@@ -273,14 +273,14 @@ function MealPlanDisplay(props) {
               <Col span={3}>g</Col>
               <Col span={3}>{Math.round((food.energy * food.foodConsumed[0].amount) / 100,0)} kcal</Col>
               <Col span={3}>
-              <Button id={food.foodConsumed[0].id}
+              <button id={food.foodConsumed[0].id}
                   onClick={(event) => {
                   deleteFood(event)
                   }}
                   data-consumedfoodid={food.foodConsumed[0].id}
                   className="ant-btn"
                   type="primary"
-                >Delete</Button>
+                >Delete</button>
               </Col>
             </Row>
           ))}
