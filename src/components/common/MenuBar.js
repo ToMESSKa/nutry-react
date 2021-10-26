@@ -8,8 +8,7 @@ function MenuBar() {
       <Menu mode="horizontal">
         <Menu.Item key="addfood">
           <Link to={"/add-food"} className="nav-link">
-            {" "}
-            Add Food{" "}
+            Meal planning
           </Link>
         </Menu.Item>
         <Menu.Item key="statistics">
@@ -18,7 +17,7 @@ function MenuBar() {
           </Link>
         </Menu.Item>
         <Menu.Item key="profile">
-          <Link to={"/profile"} className="profile">
+          <Link to={"/profile"} className="nav-link">
             Profile
           </Link>
         </Menu.Item>

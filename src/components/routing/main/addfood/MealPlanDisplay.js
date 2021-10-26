@@ -9,20 +9,29 @@ import "../../../../static/css/MealPlanDisplay.css";
 import CaloriesBar from "./CaloriesBar";
 import CalorieCounter from "./CalorieCounter";
 import moment from "moment";
+import CardForChartBarSingle from "../../../common/CardForChartBarSingle";
+import ChartBarSingle from "../../../charts/ChartBarSingle";
+import BarChartOneLine from "../../../charts/BarChartOneLine";
+import ChartCardForBarOneLine from "../../../charts/ChartCardForBarOneLine";
+import { GiWheat, GiGlassShot, GiBiceps } from "react-icons/gi";
+import { ImDroplet } from "react-icons/im";
 
 
 function MealPlanDisplay(props) {
   const [addedFoods, setAddedFoods] = useState([]);
   const [userData, setUserData] = useState({});
   const [totalCalories, setTotalCalories] = useState(0);
+  const [chartCardData, setChartCardData] = useState({});
+
+  useEffect(() => {
+    getUserDetails();
+    handleDateSelect();
+    getAddedFoods();
+  },[props.selectedDate]);
 
   useEffect(() => {
     getAddedFoods();
-    getUserDetails();
-    handleDateSelect();
-  },[props.selectedDate]);
-
-
+  },[props.addedFoods]);
 
   const getAddedFoods = () => {
     try {
@@ -32,6 +41,7 @@ function MealPlanDisplay(props) {
         .then((response) => {
           setAddedFoods(response.data.foods);
           countCalories(response);
+          setChartCardData(response.data.macroNutrients);
         });
     } catch (err) {
       console.log(err);
@@ -67,16 +77,83 @@ function MealPlanDisplay(props) {
         .then((response) => {
           setAddedFoods(response.data.foods);
           countCalories(response);
-          // setChartCardData(response.data.macroNutrients);
+          setChartCardData(response.data.macroNutrients);
         });
     } catch (err) {
       console.log(err);
     }
   }
 
+  const changeAmountByButton = (event) => {
+
+    console.log("change")
+    const newAmount = {
+      consumedFoodId: event.target.dataset.consumedfoodid,
+      direction: event.target.innerText,
+    };
+    axios
+      .post("http://localhost:8080/changeamountoffood", newAmount)
+      .then((response) => {
+        const date = { date: props.selectedDate };
+        axios
+          .post("http://localhost:8080/updatemealplan", date)
+          .then((response) => {
+            setAddedFoods(response.data.foods);
+            countCalories(response);
+            setChartCardData(response.data.macroNutrients);
+          });
+      });
+  };
+
+  const deleteFood = (event) => {
+    const foodToDelete = {
+      consumedFoodId: event.target.dataset.consumedfoodid,
+    };
+    axios
+      .post("http://localhost:8080/deletefood", foodToDelete)
+      .then((response) => {
+        const date = { date: props.selectedDate };
+        console.log(date);
+        axios
+          .post("http://localhost:8080/updatemealplan", date)
+          .then((response) => {
+            setAddedFoods(response.data.foods);
+            setChartCardData(response.data.macroNutrients);
+            countCalories(response);
+          });
+      });
+  };
+
+  const changeAmountInGramByTyping = (event, index) => {
+    const newAmount = {
+      consumedFoodId: event.target.dataset.consumedfoodid,
+      amount: event.target.value,
+    };
+    axios
+      .post("http://localhost:8080/changeamountoffoodtocustomvalue", newAmount)
+      .then((response) => {
+        const date = { date: props.selectedDate };
+        axios
+          .post("http://localhost:8080/updatemealplan", date)
+          .then((response) => {
+            setAddedFoods(response.data.foods);
+            setChartCardData(response.data.macroNutrients);
+            countCalories(response);
+          });
+      });
+  };
+
+  const macroNutrientsContainer = {
+    display: "flex",
+    flexDirection: "row",
+    gap: "20px",
+    padding: "10px",
+  };
+
   return (
     <div className = "food-display">
-      <div>
+      <Card>
+        <div>
           <h1>
           Recommended calories: {Math.round(userData.recommended, 0)}{" "}kcal
           </h1>
@@ -89,6 +166,53 @@ function MealPlanDisplay(props) {
           addedFoodsList={addedFoods}
           caloriesPassed={Math.round(totalCalories,0)}
         ></CalorieCounter>
+        </Card>
+
+        <div style={macroNutrientsContainer}>
+            <ChartCardForBarOneLine
+              chartCardData={{
+                amount: chartCardData["carbohydrate"],
+                label: "CARBOHYDRATE",
+                icon: <GiWheat />,
+                color: "#FFBB28",
+              }}
+            >
+              <BarChartOneLine
+                data={{
+                  color: "#FF8042",
+                  amount: chartCardData["carbohydrate"],
+                }}
+              ></BarChartOneLine>
+            </ChartCardForBarOneLine>
+
+            <ChartCardForBarOneLine
+              chartCardData={{
+                amount: chartCardData["protein"],
+                label: "PROTEIN",
+                icon: <GiBiceps />,
+                color: "#00C49F",
+              }}
+            >
+              <BarChartOneLine
+                data={{ color: "#00C49F", amount: chartCardData["protein"] }}
+              ></BarChartOneLine>
+            </ChartCardForBarOneLine>
+
+            <ChartCardForBarOneLine
+              chartCardData={{
+                amount: chartCardData["fat"],
+                label: "FAT",
+                icon: <ImDroplet />,
+                color: "#FFBB28",
+              }}
+            >
+              <BarChartOneLine
+                data={{ color: "#FFBB28", amount: chartCardData["fat"] }}
+              ></BarChartOneLine>
+            </ChartCardForBarOneLine>
+          </div>
+
+    <Card>
     <div>
       <Row>
       <Col span={3}><b>calorie density</b></Col>
@@ -108,26 +232,34 @@ function MealPlanDisplay(props) {
               <Col span={1}>
                  <Button
                   onClick={(event) => {
+                    changeAmountByButton(event);
                   }}
                   data-energy={food.energy}
                   data-consumedfoodid={food.foodConsumed[0].id}
                   type="primary"
                   className="calorie-button-rigth"
                   shape="rectangle"
-                  icon="+"
+                  icon="-"
                   size="small"
                 />
-                </Col>
-              <Col span={2}> <input
+              </Col>
+              <Col span={2}>
+              <div key={`${Math.floor((Math.random() * 10000000000))}-min`}>
+                 <input
                     size="4"
                     className="amount-selector"
                     data-consumedfoodid={food.foodConsumed[0].id}
-                    onBlur={(event) =>{}}
+                    onBlur={(event) =>{
+                      changeAmountInGramByTyping(event);
+                    }}
                     defaultValue={food.foodConsumed[0].amount}
-                  /></Col>
+                  />
+                  </div>
+              </Col>
               <Col span={1}>
                  <Button
                   onClick={(event) => {
+                    changeAmountByButton(event);
                   }}
                   data-energy={food.energy}
                   data-consumedfoodid={food.foodConsumed[0].id}
@@ -141,18 +273,20 @@ function MealPlanDisplay(props) {
               <Col span={3}>g</Col>
               <Col span={3}>{Math.round((food.energy * food.foodConsumed[0].amount) / 100,0)} kcal</Col>
               <Col span={3}>
-              <button id={food.foodConsumed[0].id}
+              <Button id={food.foodConsumed[0].id}
                   onClick={(event) => {
+                  deleteFood(event)
                   }}
                   data-consumedfoodid={food.foodConsumed[0].id}
                   className="ant-btn"
-                >
-                  Delete
-                </button>
+                  type="primary"
+                >Delete</Button>
               </Col>
             </Row>
           ))}
     </div>
+    </Card>
+  
     </div>
   );
 }

@@ -7,6 +7,11 @@ function Calendar(props) {
 
     const [selectedDate, setSelectedDate] = useState(new Date());
 
+    useEffect(() => {
+        props.getCurrentDate(selectedDate);
+        console.log(selectedDate)
+      },[]);
+
 
     return (
         <DatePicker selected={selectedDate}
