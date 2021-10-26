@@ -8,7 +8,7 @@ import TableForNutrients from "./TableForNutrients";
 function TableNutrients({ tableData }) {
   return (
     <div>
-      <Row>
+      <Row gutter={[16, 16]}>
         <Col flex={2}>
           <TableForNutrients
             data={tableData}

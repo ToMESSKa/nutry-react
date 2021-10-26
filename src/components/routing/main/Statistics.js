@@ -129,6 +129,7 @@ function Statistics({ children }) {
                   data={{
                     color: "#FF8042",
                     amount: avgMacroNutrients["carbohydrate"],
+                    width: "100%",
                   }}
                 ></ChartBarSingle>
               </CardForChartBarSingle>
@@ -146,6 +147,7 @@ function Statistics({ children }) {
                   data={{
                     color: "#00C49F",
                     amount: avgMacroNutrients["protein"],
+                    width: "100%",
                   }}
                 ></ChartBarSingle>
               </CardForChartBarSingle>
@@ -163,6 +165,7 @@ function Statistics({ children }) {
                   data={{
                     color: "#FFBB28",
                     amount: 100,
+                    width: "100%",
                   }}
                 ></ChartBarSingle>
               </CardForChartBarSingle>
@@ -180,6 +183,8 @@ function Statistics({ children }) {
                   data={{
                     color: "#0088FE",
                     amount: 100,
+                    width: "100%",
+                    stroke: "none",
                   }}
                 ></ChartBarSingle>
               </CardForChartBarSingle>

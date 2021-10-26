@@ -18,8 +18,9 @@ function ChartBarSingle({ data }) {
   ];
 
   return (
-    <ResponsiveContainer width="100%" height="40%" aspect={4}>
+    <ResponsiveContainer width={data.width} height="40%" aspect={4}>
       <BarChart
+      
         width={600}
         height={400}
         data={data1}
@@ -46,6 +47,7 @@ function ChartBarSingle({ data }) {
           stackId="a"
           fill={data.color}
           radius={[20, 0, 0, 20]}
+          stroke={data.stroke}
         />
         <Bar
           dataKey="pv"
@@ -53,6 +55,7 @@ function ChartBarSingle({ data }) {
           fill="#efefef"
           radius={[0, 20, 20, 0]}
           isAnimationActive={false}
+          stroke={data.stroke}
         />
       </BarChart>
     </ResponsiveContainer>

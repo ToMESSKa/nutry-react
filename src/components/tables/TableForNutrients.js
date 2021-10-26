@@ -1,6 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import "../../static/css/NutrientTable.css";
+import ChartBarSingle from '../charts/ChartBarSingle';
 
 const tableStyle = {
   background: "white",
@@ -33,7 +34,7 @@ function TableForNutrients({ data, filterCriteria }) {
               <td>
                 {nutrient.avgConsumed} {nutrient.unitName}
               </td>
-              <td>target</td>
+              <td><ChartBarSingle data={{amount: 50, color: "#fddd5c", width: "90%",stroke: "black",}}></ChartBarSingle></td>
             </tr>
           ))}
       </tbody>

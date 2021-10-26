@@ -9,11 +9,11 @@ const cardForBar = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  boxShadow: "-5px -5px 15px grey",
+  boxShadow: "-5px -5px 10px rgb(165, 161, 161)",
 };
 
 const cardLabel = {
-  fontSize: "18px",
+  fontSize: "22px",
   //height: "75px",
 };
 

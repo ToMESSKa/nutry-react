@@ -4,7 +4,26 @@ td:first-child {
     width: 300px;
 
 }
+td:nth-child(2) {
+    width: 120px;
+}
+
+/* td .recharts-responsive-container  {
+    width: 101px;
+}
+
+td .recharts-responsive-container .recharts-wrapper {
+    width: 100px;
+}
+
+td .recharts-responsive-container .recharts-wrapper svg {
+    width: 100px;
+} */
 
 thead tr th {
     font-size: 30px;
+}
+
+tbody tr td {
+    font-size: 18px;
 }
