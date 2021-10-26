@@ -21,12 +21,14 @@ function Statistics({ children }) {
   const [weightHistoryData, setWeightHistoryData] = useState([]);
   const [waterHistoryData, setWaterHistoryData] = useState([]);
   const [avgMacroNutrients, setAvgMacroNutrients] = useState({});
+  const [avgNutrients, setAvgNutrients] = useState([]);
 
   useEffect(() => {
     getEnergyHistoryData({ period: 7 });
     getWeightHistoryData({ period: 7 });
     getWaterHistoryData({ period: 7 });
-    getAvgMacroNutrients({ period: 7});
+    getAvgMacroNutrients({ period: 7 });
+    getAvgNutrients({ period: 7 });
   }, []);
 
   const getEnergyHistoryData = (period) => {
@@ -57,16 +59,28 @@ function Statistics({ children }) {
     axios
       .post("http://localhost:8080/get-avg-macronutrients-for-period", period)
       .then((response) => {
-        setAvgMacroNutrients({...response.data});
+        setAvgMacroNutrients({ ...response.data });
+      });
+  };
+
+  const getAvgNutrients = (period) => {
+    axios
+      .post("http://localhost:8080/get-avg-nutrients-for-period", period)
+      .then((response) => {
+        console.log(response.data)
+        setAvgNutrients([ ...response.data ]);
       });
   };
 
   const handlePeriodChange = (event) => {
     event.preventDefault();
     const period = event.target.dataset.period;
-    getEnergyHistoryData({period: period});
-    getWeightHistoryData({period: period});
-    getWaterHistoryData({period: period});
+    getAvgMacroNutrients({ period: period });
+    getAvgNutrients({ period: period });
+    getEnergyHistoryData({ period: period });
+    getWeightHistoryData({ period: period });
+    getWaterHistoryData({ period: period });
+    
   };
 
   return (
@@ -98,6 +112,9 @@ function Statistics({ children }) {
                 Last 7 Days
               </Radio.Button>
             </Radio.Group>
+          </Row>
+          <Row>
+            <p></p>
           </Row>
           <Row gutter={[16, 16]}>
             <Col>
@@ -168,6 +185,9 @@ function Statistics({ children }) {
               </CardForChartBarSingle>
             </Col>
           </Row>
+          <p></p>
+
+          <Row></Row>
 
           <Row gutter={[16, 16]}>
             <Col>
@@ -189,9 +209,7 @@ function Statistics({ children }) {
                   label: "Weight Change (kg)",
                 }}
               >
-                <ChartSimpleLine
-                  simpleLineChartData={weightHistoryData}
-                />
+                <ChartSimpleLine simpleLineChartData={weightHistoryData} />
               </CardForCharts>
             </Col>
 
@@ -201,14 +219,17 @@ function Statistics({ children }) {
                   label: "Water Consumption (l)",
                 }}
               >
-                <ChartSimpleArea
-                  simpleAreaChartData={waterHistoryData}
-                />
+                <ChartSimpleArea simpleAreaChartData={waterHistoryData} />
               </CardForCharts>
             </Col>
           </Row>
+
           <Row>
-            <TableNutrients></TableNutrients>
+            <p></p>
+          </Row>
+
+          <Row>
+            <TableNutrients tableData={avgNutrients}></TableNutrients>
           </Row>
         </RightColumn>
       </DividedLayout>

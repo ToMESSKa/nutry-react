@@ -1,7 +1,10 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 
-function TableNutrients() {
+function TableNutrients({ tableData }) {
+  //tableData.map((nutrient)=>(console.log(nutrient)));
+  //console.log(tableData);
+
   return (
     <div>
       <Table striped bordered hover>
@@ -12,14 +15,14 @@ function TableNutrients() {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Vitamin C</td>
-            <td>20 mg</td>
-          </tr>
-          <tr>
-            <td>Vitamin B12</td>
-            <td>20 mg</td>
-          </tr>
+          {tableData
+            .filter((nutrient) => nutrient.category === "Vitamins")
+            .map((nutrient) => (
+              <tr>
+                <td>{nutrient.nutrientName}</td>
+                <td>{nutrient.avgConsumed}</td>
+              </tr>
+            ))}
         </tbody>
       </Table>
 
@@ -31,14 +34,14 @@ function TableNutrients() {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Calcium</td>
-            <td>20 mg</td>
-          </tr>
-          <tr>
-            <td>Magnesium</td>
-            <td>20 mg</td>
-          </tr>
+        {tableData
+            .filter((nutrient) => nutrient.category === "Minerals")
+            .map((nutrient) => (
+              <tr>
+                <td>{nutrient.nutrientName}</td>
+                <td>{nutrient.avgConsumed}</td>
+              </tr>
+            ))}
         </tbody>
       </Table>
 
@@ -50,6 +53,14 @@ function TableNutrients() {
         </thead>
 
         <tbody>
+        {tableData
+            .filter((nutrient) => nutrient.category === "Carbohydrates")
+            .map((nutrient) => (
+              <tr>
+                <td>{nutrient.nutrientName}</td>
+                <td>{nutrient.avgConsumed}</td>
+              </tr>
+            ))}
         </tbody>
       </Table>
 
@@ -61,18 +72,32 @@ function TableNutrients() {
         </thead>
 
         <tbody>
+        {tableData
+            .filter((nutrient) => nutrient.category === "Lipids")
+            .map((nutrient) => (
+              <tr>
+                <td>{nutrient.nutrientName}</td>
+                <td>{nutrient.avgConsumed}</td>
+              </tr>
+            ))}
         </tbody>
       </Table>
 
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th colSpan="2">Protein</th>
+            <th colSpan="2">Others</th>
           </tr>
         </thead>
 
-        <tbody>
-        </tbody>
+        <tbody>{tableData
+            .filter((nutrient) => nutrient.category === "Others")
+            .map((nutrient) => (
+              <tr>
+                <td>{nutrient.nutrientName}</td>
+                <td>{nutrient.avgConsumed}</td>
+              </tr>
+            ))}</tbody>
       </Table>
 
       <Table striped bordered hover>
@@ -83,14 +108,14 @@ function TableNutrients() {
         </thead>
 
         <tbody>
-          <tr>
-            <td>Alcohol</td>
-            <td>20 mg</td>
-          </tr>
-          <tr>
-            <td>Coffein</td>
-            <td>20 mg</td>
-          </tr>
+        {tableData
+            .filter((nutrient) => nutrient.category === "General")
+            .map((nutrient) => (
+              <tr>
+                <td>{nutrient.nutrientName}</td>
+                <td>{nutrient.avgConsumed}</td>
+              </tr>
+            ))}
         </tbody>
       </Table>
     </div>
