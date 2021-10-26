@@ -1,0 +1,10 @@
+
+td:first-child { 
+    text-align: left; 
+    width: 300px;
+
+}
+
+thead tr th {
+    font-size: 30px;
+}
