@@ -165,6 +165,12 @@ function MealPlanDisplay(props) {
 
   };
 
+  const logo = {
+    borderRadius: "15px",
+    height: "50px"
+
+  };
+
 
 
 
@@ -173,6 +179,9 @@ function MealPlanDisplay(props) {
       
       <div className="caloric-information">
       <Card style={caloricInformation}>
+      {(promiseInProgress === true) ?
+      <div style={caloricInformation}><Logo/></div>
+            :
         <Row>
           <Col span={16}>
           <CaloriesBar
@@ -191,7 +200,8 @@ function MealPlanDisplay(props) {
           addedFoodsList={addedFoods}
           caloriesPassed={Math.round(totalCalories,0)}>
           </CalorieCounter>
-         </Row>      
+         </Row> 
+        }     
          </Card>
          </div>
 
