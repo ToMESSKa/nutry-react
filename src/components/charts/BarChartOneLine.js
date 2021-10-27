@@ -23,10 +23,10 @@ function BarChartOneLine({ data }) {
 
 
   return (
-    <ResponsiveContainer width="100%" height="40%" aspect={4}>
+    <ResponsiveContainer width="40%" height="30%">
       <BarChart
-        width={600}
-        height={200}
+        width={200}
+        height={100}
         data={data1}
         maxBarSize={20}
         layout={"vertical"}

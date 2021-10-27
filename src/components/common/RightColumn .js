@@ -2,7 +2,7 @@ import { Col } from 'antd';
 
 function RightColumn({children}) {
     return(
-        <Col span={16}>{children}</Col>
+        <Col span={20}>{children}</Col>
     )
 }
 

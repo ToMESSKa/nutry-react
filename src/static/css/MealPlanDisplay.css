@@ -13,3 +13,28 @@
 .calorie-button-rigth {
   size: 10%;
 }
+
+.macroNutrientsContainer {
+  border-radius: 25px;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: space-between;
+}
+
+.caloric-information {
+  padding-top: 10px;
+}
+
+.calendar {
+  padding-top: 10px;
+}
+
+.column-titles {
+  font-weight: 10000;
+  background-color: "#efefef";
+}
+
+.food-table {
+  padding-top: 10px;
+}

@@ -14,6 +14,7 @@ function Calendar(props) {
 
 
     return (
+      <div className="calendar">
         <DatePicker selected={selectedDate}
         onSelect={(date)=>{
             setSelectedDate(date)
@@ -24,6 +25,7 @@ function Calendar(props) {
         }
         inline
         />
+        </div>
     );
   }
   

@@ -8,6 +8,7 @@ import RightColumn from "../../../common/RightColumn ";
 import MealPlanDisplay from "./MealPlanDisplay";
 import SearchBar from "./SearchBar";
 import axios from "axios";
+import { Footer } from "antd/lib/layout/layout";
 
 
 
@@ -60,7 +61,9 @@ function AddFood() {
           <MealPlanDisplay selectedDate={selectedDate} addedFoods={addedFoods}></MealPlanDisplay>
         </RightColumn>
       </DividedLayout>
+      <Footer></Footer>
     </div>
+    
   );
 }
 

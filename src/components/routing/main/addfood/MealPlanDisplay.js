@@ -145,44 +145,54 @@ function MealPlanDisplay(props) {
 
   const macroNutrientsContainer = {
     display: "flex",
-    flexDirection: "row",
-    gap: "20px",
+    gap: "50px",
     padding: "10px",
+  };
+
+  const roundedCorner = {
+    borderRadius: "15px",
   };
 
   return (
     <div className = "food-display">
-      <Card>
-        <div>
-          <h1>
-          Recommended calories: {Math.round(userData.recommended, 0)}{" "}kcal
-          </h1>
-        </div>
-        <CaloriesBar
+      <div className="caloric-information">
+      <Card style={roundedCorner}>
+        <Row>
+          <Col span={16}>
+          <CaloriesBar
           recommended={userData.recommended}
           cal={totalCalories}
         ></CaloriesBar>
+        </Col>
+        <Col span={8}>
+        <div>
+          Recommended calories: {Math.round(userData.recommended, 0)}{" "}kcal
+        </div>
+        </Col>
+        
         <CalorieCounter
+          recommended={Math.round(userData.recommended, 0)}
           addedFoodsList={addedFoods}
-          caloriesPassed={Math.round(totalCalories,0)}
-        ></CalorieCounter>
-        </Card>
+          caloriesPassed={Math.round(totalCalories,0)}>
+          </CalorieCounter>
+         </Row>        
+         </Card>
+         </div>
 
-        <div style={macroNutrientsContainer}>
+        <div className="macroNutrientsContainer">
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["carbohydrate"],
                 label: "CARBOHYDRATE",
                 icon: <GiWheat />,
                 color: "#FFBB28",
-              }}
-            >
+              }}>
               <BarChartOneLine
                 data={{
                   color: "#FF8042",
                   amount: chartCardData["carbohydrate"],
-                }}
-              ></BarChartOneLine>
+                }}>
+              </BarChartOneLine>
             </ChartCardForBarOneLine>
 
             <ChartCardForBarOneLine
@@ -210,10 +220,25 @@ function MealPlanDisplay(props) {
                 data={{ color: "#FFBB28", amount: chartCardData["fat"] }}
               ></BarChartOneLine>
             </ChartCardForBarOneLine>
-          </div>
 
-    <Card>
+            <ChartCardForBarOneLine
+              chartCardData={{
+                amount: chartCardData["fat"],
+                label: "WATER",
+                icon: <GiGlassShot/>,
+                color: "#FFBB28",
+              }}
+            >
+              <BarChartOneLine
+                data={{ color: "#0088FE", amount: chartCardData["fat"] }}
+              ></BarChartOneLine>
+            </ChartCardForBarOneLine>
+          </div>
+          
+
+    <Card style={roundedCorner}>
     <div>
+      <div className="column-titles" >
       <Row>
       <Col span={3}><b>calorie density</b></Col>
       <Col span={3}><b>description</b></Col>
@@ -224,6 +249,8 @@ function MealPlanDisplay(props) {
       <Col span={3}><b>energy</b></Col>
       <Col span={3}><b></b></Col>
       </Row>
+      </div>
+      <div className="food-table" >
           {addedFoods.map((food, index) => (
             <Row key ={food.foodConsumed[0].id} >
               <Col span={3}><img className="food-image" alt="broccoli" src={food.energy / 100 < 1 ?
@@ -284,6 +311,7 @@ function MealPlanDisplay(props) {
               </Col>
             </Row>
           ))}
+          </div>
     </div>
     </Card>
   

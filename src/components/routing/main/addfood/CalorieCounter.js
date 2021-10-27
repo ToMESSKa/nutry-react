@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function CalorieCounter(props) {
   return (
     <div className="calorie-counter">
-      <h1>{props.caloriesPassed} kcal</h1>
+      <h1> {props.caloriesPassed} / {props.recommended} kcal</h1>
     </div>
   );
 }
