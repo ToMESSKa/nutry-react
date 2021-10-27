@@ -10,6 +10,8 @@ import MenuBar from "../../common/MenuBar";
 import AddFood from "./addfood/AddFood";
 import Profile from "./Profile";
 import Statistics from "./Statistics";
+import Loader from 'react-promise-loader'
+import { usePromiseTracker } from 'react-promise-tracker';
 
 function MainPage({ children }) {
 
@@ -24,7 +26,7 @@ function MainPage({ children }) {
       <BrowserRouter>
       <AppHeader/>
         <MenuBar/>
-        <Switch>
+         <Switch>
           <Route path="/add-food" exact component={AddFood} />
           <Route path="/statistics" exact component={Statistics} />
           <Route path="/profile" exact component={Profile} />

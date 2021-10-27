@@ -15,6 +15,9 @@ import BarChartOneLine from "../../../charts/BarChartOneLine";
 import ChartCardForBarOneLine from "../../../charts/ChartCardForBarOneLine";
 import { GiWheat, GiGlassShot, GiBiceps } from "react-icons/gi";
 import { ImDroplet } from "react-icons/im";
+import { trackPromise } from 'react-promise-tracker';
+import { usePromiseTracker } from "react-promise-tracker";
+import Logo from "../../../logo/Logo"
 
 
 function MealPlanDisplay(props) {
@@ -22,6 +25,7 @@ function MealPlanDisplay(props) {
   const [userData, setUserData] = useState({});
   const [totalCalories, setTotalCalories] = useState(0);
   const [chartCardData, setChartCardData] = useState({});
+  const { promiseInProgress } = usePromiseTracker();
 
   useEffect(() => {
     getUserDetails();
@@ -36,13 +40,14 @@ function MealPlanDisplay(props) {
   const getAddedFoods = () => {
     try {
       const date = { date: props.selectedDate };
+      trackPromise(
       axios
         .post("http://localhost:8080/updatemealplan", date)
         .then((response) => {
           setAddedFoods(response.data.foods);
           countCalories(response);
           setChartCardData(response.data.macroNutrients);
-        });
+        }));
     } catch (err) {
       console.log(err);
     }
@@ -151,12 +156,23 @@ function MealPlanDisplay(props) {
 
   const roundedCorner = {
     borderRadius: "15px",
+    height: "auto"
   };
+
+  const caloricInformation = {
+    borderRadius: "15px",
+    height: "200px"
+
+  };
+
+
+
 
   return (
     <div className = "food-display">
+      
       <div className="caloric-information">
-      <Card style={roundedCorner}>
+      <Card style={caloricInformation}>
         <Row>
           <Col span={16}>
           <CaloriesBar
@@ -175,7 +191,7 @@ function MealPlanDisplay(props) {
           addedFoodsList={addedFoods}
           caloriesPassed={Math.round(totalCalories,0)}>
           </CalorieCounter>
-         </Row>        
+         </Row>      
          </Card>
          </div>
 
@@ -250,6 +266,9 @@ function MealPlanDisplay(props) {
       <Col span={3}><b></b></Col>
       </Row>
       </div>
+      {(promiseInProgress === true) ?
+           <Logo/>
+            :
       <div className="food-table" >
           {addedFoods.map((food, index) => (
             <Row key ={food.foodConsumed[0].id} >
@@ -312,6 +331,7 @@ function MealPlanDisplay(props) {
             </Row>
           ))}
           </div>
+    }
     </div>
     </Card>
   
