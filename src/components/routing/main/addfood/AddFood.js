@@ -38,6 +38,7 @@ function AddFood() {
     
     const date = { date: selectedDate };
     console.log(date);
+
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     axios
       .post("http://localhost:8080/addfoodtomealplan", food2, config)

@@ -4,7 +4,8 @@ import {
   Form,
   Input,
   Radio,
-  InputNumber
+  InputNumber,
+    DatePicker
 } from 'antd';
 
 function UserForm(props){
@@ -40,17 +41,17 @@ function UserForm(props){
                 name="username"
                 onChange={props.handleInput}/>
           </Form.Item>
-          <Form.Item label="Age"
-                     name="age"
+            <Form.Item label="Date of birth"
+                       name="birthdate"
+                       rules={[{ required: true}]}>
+                <DatePicker style={{ width: 200, float: "left"}}
+                            name="birthdate"
+                            allowClear="false"
+                            onChange={props.handleDatePicker}
+                            >
+                </DatePicker>
+            </Form.Item>
 
-                     rules={[{ required: true, message: 'Please input your age!' }]}>
-            <Input
-                style={{ width: 100, float: "left"}}
-                suffix="years"
-                name="age"
-                maxLength="2"
-                onChange={props.handleInput}/>
-          </Form.Item>
           <Form.Item label="Weight"
                      name="weight"
 

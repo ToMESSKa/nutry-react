@@ -22,7 +22,7 @@ function Stepper () {
         email: "",
         password: "",
         confirm: "",
-        age: "",
+        birthdate: "",
         weight: "",
         height: "",
         gender: "",
@@ -35,7 +35,7 @@ function Stepper () {
         const email = userData.email;
         const password = userData.password;
         const confirm = userData.confirm;
-        const age = userData.age;
+        const birthdate = userData.birthdate;
         const weight = userData.weight;
         const height = userData.height;
         const gender = userData.gender;
@@ -48,7 +48,7 @@ function Stepper () {
             email:email,
             password:password,
             confirm:confirm,
-            age:age,
+            birthdate:birthdate,
             weight:weight,
             height:height,
             gender: gender,
@@ -66,9 +66,15 @@ function Stepper () {
     };
 
     const handleSelectInput = (selected) =>{
-        setUserData({ ...userData, [selected.name]: selected});
-        console.log(selected);
+        setUserData({ ...userData, gender: selected});
+        console.log(userData.gender);
     };
+
+    const handleDatePicker = (date, dateString) =>{
+        setUserData({ ...userData, birthdate: dateString});
+        console.log(userData.birthdate);
+        console.log(dateString);}
+
 
     const { Step } = Steps;
 
@@ -79,7 +85,7 @@ function Stepper () {
         },
         {
             title: "User data",
-            content: <UserForm handleInput={handleInput} userData={userData}/>,
+            content: <UserForm handleInput={handleInput} handleDatePicker={handleDatePicker} userData={userData}/>,
         },
         {
             title: "Activity",
