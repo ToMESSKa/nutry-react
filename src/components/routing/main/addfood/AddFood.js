@@ -61,7 +61,6 @@ function AddFood() {
           <MealPlanDisplay selectedDate={selectedDate} addedFoods={addedFoods}></MealPlanDisplay>
         </RightColumn>
       </DividedLayout>
-      <Footer></Footer>
     </div>
     
   );
