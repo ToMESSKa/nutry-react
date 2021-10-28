@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Button, Layout, Carousel, Card, Row, Col } from 'antd';
+import "./Login.css"
+import {Form, Input, Button, Layout, Carousel, Card, Row, Col, Space, message} from 'antd';
 import axios from "axios";
 import AppFooter from "../../footer/AppFooter";
 import Logo from "../../logo/Logo";
 import Brand from "../../brand/Brand";
 import {Link} from "react-router-dom";
+import { MailOutlined, LockOutlined } from '@ant-design/icons';
 
 
 
 function Login() {
     const [credentials, setCredentials] = useState({
-        username: "",
+        email: "",
         password: "",
     });
 
@@ -44,101 +46,96 @@ function Login() {
     };
 
     return (
-      <div className="landing">
-        <Layout>
-          <Row>
-            <Logo />
-          </Row>
-          <Row>
-            <Brand />
-          </Row>
-          <Row>
-            <Col span={14} offset={5}>
+        <div className="landing">
+            <Layout>
                 <Row>
-              <Col span={12}>
-                      <Card>
-                          <Row>
-                          <Col span={22} offset={2} style={{height: 60}}>
-                              <h2 align="left">About us:</h2>
-                          </Col>
-                          </Row>
-                      <Carousel autoplay>
-                          <Card style={{height: 300}}>
-                              <h3>Ez egy honlap amit mi csinaltunk Neked</h3>
-                          </Card>
-                          <Card style={{height: 300}}>
-                              <h3>Itt mindent megtalalsz ami az egeszseges elethez kell</h3>
-                          </Card>
-                          <Card style={{height: 300}}>
-                              <h3>Es meg annal is tobbet a kajak tapanyagairol</h3>
-                          </Card>
-                      </Carousel>
-                      </Card>
-              </Col>
-                <Col span={12}>
-                    <Card>
-                        <Row>
-                            <Col span={22} offset={2} style={{height: 60}}>
-                                <h2 align="left">Please log in!</h2>
-                            </Col>
-                        </Row>
-
-              <Form
-          name="basic"
-          labelCol={{ span: 6 }}
-          wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Username"
-            name="username"
-            onChange={handleInputChange}
-            rules={[{ required: true, message: "Please input your username!" }]}
-          >
-            <Input name="username" />
-          </Form.Item>
-
-          <Form.Item
-            label="Password"
-            name="password"
-            onChange={handleInputChange}
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password name="password" />
-          </Form.Item>
-                  <Row>
-                      <Col offset={2} span={8}>
-                          <Form.Item >
-                            <Link to="/registration">or Register</Link>
-                          </Form.Item>
-                      </Col>
-                      <Col offset={7} span={2}>
-                          <Form.Item >
-                            <Button type="primary" htmlType="submit" onClick={sendCredentials}>
-                              Submit
-                            </Button>
-                          </Form.Item>
-                      </Col>
-                  </Row>
-
-
-
-
-        </Form>
-                    </Card>
-        </Col>
+                    <Logo />
                 </Row>
-            </Col>
+                <Row>
+                    <Brand />
+                </Row>
+                <Row>
+                    <Col span={14} offset={5}>
+                        <Row>
+                            <Col span={11}>
+                                <Card>
+                                    <Row>
+                                        <Col span={22} offset={2} style={{height: 60}}>
+                                            <h4 align="left" className="login-form-title">About us:</h4>
+                                        </Col>
+                                    </Row>
+                                    <Carousel autoplay>
+                                        <Card style={{height: 300}}>
+                                            <p>Ez egy honlap amit mi csinaltunk Neked</p>
+                                        </Card>
+                                        <Card style={{height: 300}}>
+                                            <p>Itt mindent megtalalsz ami az egeszseges elethez kell</p>
+                                        </Card>
+                                        <Card style={{height: 300}}>
+                                            <p>Es meg annal is tobbet a kajak tapanyagairol</p>
+                                        </Card>
+                                    </Carousel>
+                                </Card>
+                            </Col>
+                            <Col span={2}>
 
-          </Row>
-          <AppFooter />
-        </Layout>
-        
-      </div>
+                            </Col>
+                            <Col span={11}>
+                                <Card>
+                                    <Row>
+                                        <Col style={{height: 60}}>
+                                            <h4 align="left" className="login-form-title">Please log in!</h4>
+                                        </Col>
+                                    </Row>
+
+                                    <Form
+                                        className="login-form"
+                                        name="basic"
+                                        initialValues={{ remember: true }}
+                                        onFinish={onFinish}
+                                        onFinishFailed={onFinishFailed}
+                                        autoComplete="off"
+                                        size="large"
+                                    >
+                                        <Form.Item
+                                            name="email"
+                                            onChange={handleInputChange}
+                                            rules={[{ required: true, message: "Please input your Email!" }]}
+                                        >
+                                            <Input name="email" prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+                                        </Form.Item>
+
+                                        <Form.Item
+                                            name="password"
+                                            onChange={handleInputChange}
+                                            rules={[{ required: true, message: "Please input your password!" }]}
+                                        >
+                                            <Input.Password name="password" prefix={<LockOutlined className="site-form-item-icon" />}
+                                                            type="password"
+                                                            placeholder="Password"/>
+                                        </Form.Item>
+                                        <Form.Item>
+                                            <Button type="primary" htmlType="submit" className="login-form-button"
+                                                    onClick={() => {
+                                                        sendCredentials();
+                                                        message.success("Processing complete!");
+                                                    }}>
+                                                Log in
+                                            </Button>
+                                            Or <a href="/registration">register now!</a>
+                                        </Form.Item>
+                                    </Form>
+                                </Card>
+                            </Col>
+
+                        </Row>
+                    </Col>
+
+                </Row>
+                <AppFooter />
+            </Layout>
+
+        </div>
     );
 }
 export default Login;
-
