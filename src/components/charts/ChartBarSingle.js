@@ -9,18 +9,30 @@ import {
 
 
 function ChartBarSingle({ data }) {
+  console.log(typeof data.recommended);
+  console.log(data.recommended)
+  console.log(typeof data.consumed);
+  console.log(data.consumed);
   const data1 = [
     {
       name: "Page A",
-      uv: data.amount,
-      pv: 100-data.amount,  // TODO calc recommended
+      consumed: (data.consumed === null || data.consumed === 0.0) ? 0.0 : (data.consumed > data.recommended || data.consumed === data.recommended) ? 100.0 : data.consumed < data.recommended ? data.consumed/data.recommended*100.0 : 0.0,
+      max:  (data.recommended === 0 || data.recommended === null || data.consumed > data.recommended) ? 0 : (data.recommended-data.consumed)/data.recommended*100.0, //data.consumed>data.crecommended?data.recommended:(data.recommended-data.consumed)/100,  // TODO calc recommended
     },
   ];
 
   return (
-    <ResponsiveContainer width={data.width} height="40%" aspect={4}>
+
+    // <div>
+    //   {isLoggedIn        
+    //   ? <LogoutButton onClick={this.handleLogoutClick} />
+    //   : <LoginButton onClick={this.handleLoginClick} />      }
+    // </div>
+
+     <ResponsiveContainer width={data.width} height="40%" aspect={4}>
+
+
       <BarChart
-      
         width={600}
         height={400}
         data={data1}
@@ -43,23 +55,30 @@ function ChartBarSingle({ data }) {
           width={0}
         />
         <Bar
-          dataKey="uv"
+          dataKey="consumed"
           stackId="a"
           fill={data.color}
-          radius={[20, 0, 0, 20]}
+          radius={[0, 0, 0, 0]}
           stroke={data.stroke}
+          paddingAngle={0} 
         />
         <Bar
-          dataKey="pv"
+          dataKey="max"
           stackId="a"
           fill="#efefef"
-          radius={[0, 20, 20, 0]}
+          radius={[0, 0, 0, 0]}
           isAnimationActive={false}
           stroke={data.stroke}
+          paddingAngle={0} 
         />
       </BarChart>
-    </ResponsiveContainer>
-  );
+
+      
+    </ResponsiveContainer> 
+  
+  
+  
+    );
 }
 
 export default ChartBarSingle;

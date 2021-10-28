@@ -3,20 +3,17 @@ import Table from "react-bootstrap/Table";
 import "../../static/css/NutrientTable.css";
 import ChartBarSingle from '../charts/ChartBarSingle';
 
-const tableStyle = {
-  background: "white",
-  width: "600px",
-};
+
 
 const tableHeaderStyle = {
   background: "rgb(139, 224, 181)",
 };
 
 function TableForNutrients({ data, filterCriteria }) {
-  console.log(data);
-  console.log(filterCriteria);
+  
   return (
-    <Table striped bordered hover style={tableStyle}>
+    <div className="nutrient-table">
+    <Table  bordered hover >
       <thead>
         <tr>
           <th colSpan="3" style={tableHeaderStyle}>
@@ -32,13 +29,14 @@ function TableForNutrients({ data, filterCriteria }) {
             <tr key={nutrient.nutrientId2}>
               <td>{nutrient.nutrientName}</td>
               <td>
-                {nutrient.avgConsumed} {nutrient.unitName}
+                {nutrient.avgConsumed} / {nutrient.recommended} {nutrient.unitName}
               </td>
-              <td><ChartBarSingle data={{amount: 50, color: "#fddd5c", width: "90%",stroke: "black",}}></ChartBarSingle></td>
+              <td><ChartBarSingle data={{recommended: nutrient.recommended, consumed: nutrient.avgConsumed, color: "#fddd5c", width: "90%",stroke: "black",}}></ChartBarSingle></td>
             </tr>
           ))}
       </tbody>
     </Table>
+    </div>
   );
 }
 

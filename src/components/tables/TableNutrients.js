@@ -1,15 +1,13 @@
 import { Row, Col } from "antd";
 import React from "react";
-import Table from "react-bootstrap/Table";
 import "../../static/css/NutrientTable.css";
 import TableForNutrients from "./TableForNutrients";
 
-
-function TableNutrients({ tableData }) {
+function TableNutrients({ tableData, recommendedNutrients }) {
   return (
     <div>
-      <Row gutter={[16, 16]}>
-        <Col flex={2}>
+      <Row gutter={[40, 40]}>
+        <Col>
           <TableForNutrients
             data={tableData}
             filterCriteria={"General"}
@@ -24,7 +22,7 @@ function TableNutrients({ tableData }) {
           ></TableForNutrients>
         </Col>
 
-        <Col flex={2}>
+        <Col>
           <TableForNutrients
             data={tableData}
             filterCriteria={"Minerals"}

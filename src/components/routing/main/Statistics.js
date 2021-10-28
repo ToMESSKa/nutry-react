@@ -72,6 +72,16 @@ function Statistics({ children }) {
       });
   };
 
+/*   const getRecommendedNutrients = (period) => {
+    axios
+      .post("http://localhost:8080/get-recommended-nutrients", period)
+      .then((response) => {
+        console.log(response.data)
+        setRecommendedNutrients([ ...response.data ]);
+      });
+  };
+ */
+
   const handlePeriodChange = (event) => {
     event.preventDefault();
     const period = event.target.dataset.period;
@@ -116,7 +126,7 @@ function Statistics({ children }) {
           <Row>
             <p></p>
           </Row>
-          <Row gutter={[16, 16]}>
+          <Row gutter={[40, 40]}>
             <Col>
               <CardForChartBarSingle
                 chartCardData={{
@@ -128,7 +138,8 @@ function Statistics({ children }) {
                 <ChartBarSingle
                   data={{
                     color: "#FF8042",
-                    amount: avgMacroNutrients["carbohydrate"],
+                    consumed: avgMacroNutrients["carbohydrate"],
+                    recommended: 100,
                     width: "100%",
                   }}
                 ></ChartBarSingle>
@@ -146,7 +157,8 @@ function Statistics({ children }) {
                 <ChartBarSingle
                   data={{
                     color: "#00C49F",
-                    amount: avgMacroNutrients["protein"],
+                    consumed: avgMacroNutrients["protein"],
+                    recommended: 100,
                     width: "100%",
                   }}
                 ></ChartBarSingle>
@@ -164,7 +176,8 @@ function Statistics({ children }) {
                 <ChartBarSingle
                   data={{
                     color: "#FFBB28",
-                    amount: 100,
+                    consumed: avgMacroNutrients["fat"],
+                    recommended: 100,
                     width: "100%",
                   }}
                 ></ChartBarSingle>
@@ -174,7 +187,7 @@ function Statistics({ children }) {
             <Col>
               <CardForChartBarSingle
                 chartCardData={{
-                  amount: 100,
+                  amount: 2,
                   label: "WATER",
                   icon: <GiGlassShot size={40} />,
                 }}
@@ -182,7 +195,8 @@ function Statistics({ children }) {
                 <ChartBarSingle
                   data={{
                     color: "#0088FE",
-                    amount: 100,
+                    consumed: 2,
+                    recommended: 3,
                     width: "100%",
                     stroke: "none",
                   }}
@@ -194,7 +208,7 @@ function Statistics({ children }) {
 
           <Row></Row>
 
-          <Row gutter={[16, 16]}>
+          <Row gutter={[40, 40]}>
             <Col>
               <CardForCharts
                 cardData={{

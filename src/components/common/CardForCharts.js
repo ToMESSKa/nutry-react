@@ -10,7 +10,6 @@ const cardForSimpleBar = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    boxShadow: "-5px -5px 10px rgb(165, 161, 161)",
   };
 
   const cardHeading = {
