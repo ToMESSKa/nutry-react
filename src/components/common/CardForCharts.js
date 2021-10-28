@@ -20,7 +20,7 @@ function CardForCharts({children, cardData}) {
   return (
     <div style={cardForSimpleBar}>
       <div>
-        <h2 style={cardHeading}>{cardData.label}</h2>
+        <h2 style={cardHeading}>{cardData.label.toUpperCase()}</h2>
       </div>  
       {children}
     </div>

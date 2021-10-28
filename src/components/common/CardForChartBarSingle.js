@@ -9,33 +9,38 @@ const cardForBar = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+
 };
 
 const cardLabel = {
-  fontSize: "18px",
-  height: "75px",
+  fontSize: "22px",
+  //height: "75px",
 };
 
 const cardLabelContainer = {
-  height: "22px",
+  //height: "22px",
 };
 
 const cardHeadingContainter = {
-  padding: "10px",
+
+  fontSize: "30px",
+  height: "50px",
+  //padding: "10px",
 }
 
 function CardForChartBarSingle({ children, chartCardData }) {
   return (
     <div style={cardForBar}>
       <div style={cardHeadingContainter}>
-        <h1>
-          {chartCardData.icon} {Math.round(chartCardData.amount)} / {chartCardData.label==="WATER"?"3l":"100g"}
-        </h1>
-      </div>
-      <div style={cardLabelContainer}>
-        <p style={cardLabel}>{chartCardData.label}</p>
+        <p>
+          {chartCardData.icon} {chartCardData.label}
+        </p>
       </div>
       {children}
+      <div style={cardLabelContainer}>
+        <p style={cardLabel}>{Math.round(chartCardData.amount)} / {chartCardData.label==="WATER"?"3l":"100g"}</p>
+      </div>
+      
     </div>
   );
 }

@@ -1,98 +1,42 @@
+import { Row, Col } from "antd";
 import React from "react";
-import Table from "react-bootstrap/Table";
+import "../../static/css/NutrientTable.css";
+import TableForNutrients from "./TableForNutrients";
 
-function TableNutrients() {
+function TableNutrients({ tableData, recommendedNutrients }) {
   return (
     <div>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th colSpan="2">Vitamins</th>
-          </tr>
-        </thead>
+      <Row gutter={[40, 40]}>
+        <Col>
+          <TableForNutrients
+            data={tableData}
+            filterCriteria={"General"}
+          ></TableForNutrients>
+          <TableForNutrients
+            data={tableData}
+            filterCriteria={"Vitamins"}
+          ></TableForNutrients>
+          <TableForNutrients
+            data={tableData}
+            filterCriteria={"Carbohydrates"}
+          ></TableForNutrients>
+        </Col>
 
-        <tbody>
-          <tr>
-            <td>Vitamin C</td>
-            <td>20 mg</td>
-          </tr>
-          <tr>
-            <td>Vitamin B12</td>
-            <td>20 mg</td>
-          </tr>
-        </tbody>
-      </Table>
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th colSpan="2">Minerals</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>Calcium</td>
-            <td>20 mg</td>
-          </tr>
-          <tr>
-            <td>Magnesium</td>
-            <td>20 mg</td>
-          </tr>
-        </tbody>
-      </Table>
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th colSpan="2">Carbohydrates</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        </tbody>
-      </Table>
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th colSpan="2">Lipids</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        </tbody>
-      </Table>
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th colSpan="2">Protein</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        </tbody>
-      </Table>
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th colSpan="2">General</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>Alcohol</td>
-            <td>20 mg</td>
-          </tr>
-          <tr>
-            <td>Coffein</td>
-            <td>20 mg</td>
-          </tr>
-        </tbody>
-      </Table>
+        <Col>
+          <TableForNutrients
+            data={tableData}
+            filterCriteria={"Minerals"}
+          ></TableForNutrients>
+          <TableForNutrients
+            data={tableData}
+            filterCriteria={"Lipids"}
+          ></TableForNutrients>
+          <TableForNutrients
+            data={tableData}
+            filterCriteria={"Others"}
+          ></TableForNutrients>
+        </Col>
+      </Row>
     </div>
   );
 }
