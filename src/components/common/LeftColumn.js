@@ -7,7 +7,7 @@ import { Children } from 'react';
 
 function LeftColumn({children}) {
     return(
-        <Col span={4}>{children}</Col>
+        <Col span={4} offset={1} style={{minWidth: 300}}>{children}</Col>
 
     )
 }

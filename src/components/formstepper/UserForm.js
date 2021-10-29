@@ -7,6 +7,7 @@ import {
   InputNumber,
     DatePicker
 } from 'antd';
+import "./UserForm.css"
 
 function UserForm(props){
 

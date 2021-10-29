@@ -8,6 +8,7 @@ import Logo from "../../logo/Logo";
 import Brand from "../../brand/Brand";
 import {Link} from "react-router-dom";
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
+import AddFood from "../main/addfood/AddFood";
 
 
 
@@ -115,13 +116,16 @@ function Login() {
                                                             placeholder="Password"/>
                                         </Form.Item>
                                         <Form.Item>
+                                            <Link to={{pathname:"/"}}>
                                             <Button type="primary" htmlType="submit" className="login-form-button"
                                                     onClick={() => {
                                                         sendCredentials();
                                                         message.success("Processing complete!");
-                                                    }}>
+                                                    }}
+                                                    >
                                                 Log in
                                             </Button>
+                                            </Link>
                                             Or <a href="/registration">register now!</a>
                                         </Form.Item>
                                     </Form>
