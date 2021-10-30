@@ -38,16 +38,23 @@ function MealPlanDisplay(props) {
   },[props.addedFoods]);
 
   const getAddedFoods = () => {
+      const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     try {
       const date = { date: props.selectedDate };
       trackPromise(
       axios
-        .post("http://localhost:8080/updatemealplan", date)
+        .post("http://localhost:8080/updatemealplan", date, config)
         .then((response) => {
           setAddedFoods(response.data.foods);
           countCalories(response);
           setChartCardData(response.data.macroNutrients);
-        }));
+        }).catch((error) => {
+          switch (error.response.status) {
+              case 403:
+                  console.log("ERROR 403 response")
+              default:
+                  break}
+      }));
     } catch (err) {
       console.log(err);
     }
@@ -75,21 +82,29 @@ function MealPlanDisplay(props) {
 
   const handleDateSelect = () => {
     console.log(props.selectedDate);
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     const newDate = { date: moment(props.selectedDate).format("YYYY-MM-DD") };
     try {
       axios
-        .post("http://localhost:8080/updatemealplan", newDate)
+        .post("http://localhost:8080/updatemealplan", newDate, config)
         .then((response) => {
           setAddedFoods(response.data.foods);
           countCalories(response);
           setChartCardData(response.data.macroNutrients);
-        });
+        }).catch((error) => {
+          switch (error.response.status) {
+              case 403:
+                  console.log("ERROR 403 response")
+              default:
+                  break}
+      });
     } catch (err) {
       console.log(err);
     }
   }
 
   const changeAmountByButton = (event) => {
+      const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
 
     console.log("change")
     const newAmount = {
@@ -101,16 +116,23 @@ function MealPlanDisplay(props) {
       .then((response) => {
         const date = { date: props.selectedDate };
         axios
-          .post("http://localhost:8080/updatemealplan", date)
+          .post("http://localhost:8080/updatemealplan", date, config)
           .then((response) => {
             setAddedFoods(response.data.foods);
             countCalories(response);
             setChartCardData(response.data.macroNutrients);
-          });
+          }).catch((error) => {
+            switch (error.response.status) {
+                case 403:
+                    console.log("ERROR 403 response")
+                default:
+                    break}
+        });
       });
   };
 
   const deleteFood = (event) => {
+      const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     const foodToDelete = {
       consumedFoodId: event.target.dataset.consumedfoodid,
     };
@@ -120,31 +142,47 @@ function MealPlanDisplay(props) {
         const date = { date: props.selectedDate };
         console.log(date);
         axios
-          .post("http://localhost:8080/updatemealplan", date)
+          .post("http://localhost:8080/updatemealplan", date, config)
           .then((response) => {
             setAddedFoods(response.data.foods);
             setChartCardData(response.data.macroNutrients);
             countCalories(response);
-          });
+          }).catch((error) => {
+            switch (error.response.status) {
+                case 403:
+                    console.log("ERROR 403 response")
+                default:
+                    break}
+        });
       });
   };
+
+
+
 
   const changeAmountInGramByTyping = (event, index) => {
     const newAmount = {
       consumedFoodId: event.target.dataset.consumedfoodid,
       amount: event.target.value,
     };
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     axios
       .post("http://localhost:8080/changeamountoffoodtocustomvalue", newAmount)
       .then((response) => {
         const date = { date: props.selectedDate };
         axios
-          .post("http://localhost:8080/updatemealplan", date)
+          .post("http://localhost:8080/updatemealplan", date, config)
           .then((response) => {
             setAddedFoods(response.data.foods);
             setChartCardData(response.data.macroNutrients);
             countCalories(response);
-          });
+          }).catch((error) => {
+            switch (error.response.status) {
+                case 403:
+                    console.log("ERROR 403 response")
+                default:
+                    break}
+        });
       });
   };
 
