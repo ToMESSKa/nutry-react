@@ -2,8 +2,11 @@ import { Menu } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
 import Login from "../routing/login/Login";
+import '../../../src/static/css/MenuBar.css';
 
 function MenuBar() {
+
+  const menuItem = {fontSize: "1.2rem"}
 
   const tokenClear = () => {
     localStorage.clear();

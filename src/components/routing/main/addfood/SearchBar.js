@@ -87,7 +87,7 @@ function SearchBar(props) {
               className="dataItem"
               key={result.fdcId}
             >
-              Category: {result.foodCategory}, Food: {result.description}
+              {result.description} 
             </p>
           ))}
         </div>
