@@ -29,7 +29,7 @@ function TableForNutrients({ data, filterCriteria }) {
             <tr key={nutrient.nutrientId2}>
               <td>{nutrient.nutrientName}</td>
               <td>
-                {nutrient.avgConsumed} / {nutrient.recommended} {nutrient.unitName}
+                {nutrient.avgConsumed.toFixed(1)} / {nutrient.recommended} {nutrient.unitName}
               </td>
               <td><ChartBarSingle data={{recommended: nutrient.recommended, consumed: nutrient.avgConsumed, color: "#fddd5c", width: "90%",stroke: "black",}}></ChartBarSingle></td>
             </tr>

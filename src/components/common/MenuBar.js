@@ -1,13 +1,14 @@
-import { Menu } from "antd";
+import { Menu, Button } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link, useHistory } from "react-router-dom";
 import Login from "../routing/login/Login";
 
-function MenuBar() {
+function MenuBar({history}) {
 
-  const tokenClear = () => {
+  const logOut = () => {
     localStorage.clear();
-    console.log(localStorage.getItem("token"))
+    console.log(localStorage.getItem("token"));
+    history.push("/login");
   }
 
     return(
@@ -28,10 +29,10 @@ function MenuBar() {
             Profile
           </Link>
         </Menu.Item>
-        <Menu.Item key="logout" onClick={tokenClear}>
-          <Link to={{ pathname: "/login" }} className="nav-link" >
+        <Menu.Item key="logout" >
+          <div className="nav-link" onClick={logOut}>
             Logout
-          </Link>
+          </div>
         </Menu.Item>
       </Menu>
     </div>

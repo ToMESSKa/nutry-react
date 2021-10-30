@@ -10,11 +10,13 @@ function Registration() {
     return (
         <div className="registration">
             <Layout>
-                <Row>
+                <Row style={{height:140}}>
+
                     <Col span={6} offset={6}>
                         <Logo />
                     </Col>
-                    <Space align="end">
+
+                    <Space align="center" direction="horizontal">
                         <Col span={4}>
                             <Brand />
                         </Col>

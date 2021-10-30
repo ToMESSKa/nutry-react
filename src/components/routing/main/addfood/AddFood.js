@@ -44,7 +44,7 @@ function AddFood() {
       .post("http://localhost:8080/addfoodtomealplan", food2, config)
       .then((response) => {
         axios
-          .post("http://localhost:8080/updatemealplan", date)
+          .post("http://localhost:8080/updatemealplan", date, config)
           .then((response) => {
             setAddedFoods(response.data.foods);
           });
