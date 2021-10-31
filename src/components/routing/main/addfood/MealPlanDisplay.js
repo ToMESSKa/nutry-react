@@ -18,6 +18,7 @@ import { ImDroplet } from "react-icons/im";
 import { trackPromise } from 'react-promise-tracker';
 import { usePromiseTracker } from "react-promise-tracker";
 import LoadLogo from "../../../logo/LoadLogo";
+import BarChartAntDesign from "../../../charts/BarChartAntDesign";
 
 
 function MealPlanDisplay(props) {
@@ -263,12 +264,10 @@ function MealPlanDisplay(props) {
                 icon: <GiWheat />,
                 color: "#FFBB28",
               }}>
-              <BarChartOneLine
-                data={{
-                  color: "#FF8042",
-                  amount: chartCardData["carbohydrate"],
+              <BarChartAntDesign
+                data={{color: "#FF8042", amount: chartCardData["carbohydrate"], recommended:100,
                 }}>
-              </BarChartOneLine>
+              </BarChartAntDesign>
             </ChartCardForBarOneLine>
             </Col>
             <Col flex="25%">
@@ -280,9 +279,9 @@ function MealPlanDisplay(props) {
                 color: "#00C49F",
               }}
             >
-              <BarChartOneLine
-                data={{ color: "#00C49F", amount: chartCardData["protein"] }}
-              ></BarChartOneLine>
+              <BarChartAntDesign
+                data={{ color: "#00C49F", amount: chartCardData["protein"], recommended:100, }}
+              ></BarChartAntDesign>
             </ChartCardForBarOneLine>
             </Col>
         <Col flex="25%">
@@ -294,9 +293,9 @@ function MealPlanDisplay(props) {
                 color: "#FFBB28",
               }}
             >
-              <BarChartOneLine
-                data={{ color: "#FFBB28", amount: chartCardData["fat"] }}
-              ></BarChartOneLine>
+              <BarChartAntDesign
+                data={{ color: "#FFBB28", amount: chartCardData["fat"], recommended:100, }}
+              ></BarChartAntDesign>
             </ChartCardForBarOneLine>
         </Col>
 
@@ -309,9 +308,9 @@ function MealPlanDisplay(props) {
                 color: "#FFBB28",
               }}
             >
-              <BarChartOneLine
-                data={{ color: "#0088FE", amount: chartCardData["fat"] }}
-              ></BarChartOneLine>
+              <BarChartAntDesign
+                data={{ color: "#0088FE", amount: chartCardData["fat"], recommended:100, }}
+              ></BarChartAntDesign>
             </ChartCardForBarOneLine>
         </Col>
           </Row>

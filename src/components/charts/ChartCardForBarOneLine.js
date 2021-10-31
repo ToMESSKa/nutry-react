@@ -27,7 +27,7 @@ function ChartCardForBar({children, chartCardData}) {
       {(promiseInProgress === true) ?
            <LoadLogo/>
             :
-            <div>
+            <div style={{width:"85%"}}>
       <h4>{chartCardData.icon} {Math.round(chartCardData.amount)} g </h4>
       <div>{chartCardData.label}</div>
       {children}

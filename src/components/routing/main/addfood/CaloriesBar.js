@@ -1,5 +1,5 @@
 import { Progress } from 'antd';
-import "./CaloriesBar.css"
+import "../../../../static/css/CaloriesBar.css"
 
 function CaloriesBar(props) {
     return (
@@ -11,7 +11,6 @@ function CaloriesBar(props) {
                             (parseInt(props.recommended)/parseInt(props.cal))*100,
                             strokeColor:"#7cc028"}}
                   strokeColor={"#ff0000"}
-                  style={{height:30}}
                   showInfo={false}/>
         </div>
     );

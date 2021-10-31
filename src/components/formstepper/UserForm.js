@@ -45,10 +45,11 @@ function UserForm(props){
             <Form.Item label="Date of birth"
                        name="birthdate"
                        rules={[{ required: true}]}>
-                <DatePicker style={{ width: 200, float: "left"}}
+                <DatePicker style={{ width: "200px", float: "left"}}
                             name="birthdate"
-                            allowClear="false"
+                            allowClear={false}
                             onChange={props.handleDatePicker}
+                            showToday={false}
                             >
                 </DatePicker>
             </Form.Item>

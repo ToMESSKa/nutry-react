@@ -13,7 +13,7 @@ function TableForNutrients({ data, filterCriteria }) {
   
   return (
     <div className="nutrient-table">
-    <Table  bordered hover >
+    <Table  bordered hover className="ant-nutrient-table">
       <thead>
         <tr>
           <th colSpan="3" style={tableHeaderStyle}>
