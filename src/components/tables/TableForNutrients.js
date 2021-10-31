@@ -25,6 +25,7 @@ function TableForNutrients({ data, filterCriteria }) {
       <tbody>
         {data
           .filter((nutrient) => nutrient.category ===  filterCriteria )
+          .sort((a,b) => (a.nutrientName > b.nutrientName) ? 1 : ((b.nutrientName > a.nutrientName) ? -1 : 0))
           .map((nutrient) => (
             <tr key={nutrient.nutrientId2}>
               <td>{nutrient.nutrientName}</td>
