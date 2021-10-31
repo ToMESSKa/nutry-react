@@ -16,10 +16,12 @@
 
 .macroNutrientsContainer {
   border-radius: 25px;
-  display: flex;
+  /*display: flex;*/
   padding-top: 10px;
   padding-bottom: 10px;
-  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  /*justify-content: space-between;*/
 }
 
 .caloric-information {

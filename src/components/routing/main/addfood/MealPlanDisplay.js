@@ -94,7 +94,11 @@ function MealPlanDisplay(props) {
         }).catch((error) => {
           switch (error.response.status) {
               case 403:
-                  console.log("ERROR 403 response")
+                  alert("Not authenticated, please log in!\n" +  "ERROR " + error.response.status);
+                  break
+              // case 500:
+              //     alert("Oops! Something went wrong!\n Please come back later!" +  "ERROR " + error.response.status);
+              //     break
               default:
                   break}
       });
@@ -243,7 +247,8 @@ function MealPlanDisplay(props) {
          </Card>
          </div>
 
-        <div className="macroNutrientsContainer">
+        <Row className="macroNutrientsContainer" gutter={[20,20]}>
+            <Col>
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["carbohydrate"],
@@ -258,7 +263,8 @@ function MealPlanDisplay(props) {
                 }}>
               </BarChartOneLine>
             </ChartCardForBarOneLine>
-
+            </Col>
+            <Col>
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["protein"],
@@ -271,7 +277,8 @@ function MealPlanDisplay(props) {
                 data={{ color: "#00C49F", amount: chartCardData["protein"] }}
               ></BarChartOneLine>
             </ChartCardForBarOneLine>
-
+            </Col>
+        <Col>
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["fat"],
@@ -284,7 +291,8 @@ function MealPlanDisplay(props) {
                 data={{ color: "#FFBB28", amount: chartCardData["fat"] }}
               ></BarChartOneLine>
             </ChartCardForBarOneLine>
-
+        </Col>
+        <Col>
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["fat"],
@@ -297,7 +305,8 @@ function MealPlanDisplay(props) {
                 data={{ color: "#0088FE", amount: chartCardData["fat"] }}
               ></BarChartOneLine>
             </ChartCardForBarOneLine>
-          </div>
+        </Col>
+          </Row>
           
 
     <Card style={roundedCorner}>
