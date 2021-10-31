@@ -67,7 +67,7 @@ function Statistics({ children }) {
     axios
       .post("http://localhost:8080/get-avg-nutrients-for-period", period)
       .then((response) => {
-        console.log(response.data)
+        //console.log(response.data)
         setAvgNutrients([ ...response.data ]);
       });
   };
