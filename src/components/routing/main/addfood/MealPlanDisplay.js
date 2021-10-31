@@ -27,12 +27,13 @@ function MealPlanDisplay(props) {
   const [totalCalories, setTotalCalories] = useState(0);
   const [chartCardData, setChartCardData] = useState({});
   const { promiseInProgress } = usePromiseTracker();
-  const {selectedNutrients, setSelectedNutrients} = useState({});
+  const [selectedNutrients, setSelectedNutrients] = useState([]);
 
   useEffect(() => {
     getUserDetails();
     handleDateSelect();
     getAddedFoods();
+    getSelectedNutrients();
   },[props.selectedDate]);
 
   useEffect(() => {
@@ -50,6 +51,7 @@ function MealPlanDisplay(props) {
           setAddedFoods(response.data.foods);
           countCalories(response);
           setChartCardData(response.data.macroNutrients);
+          getSelectedNutrients()
         }).catch((error) => {
           switch (error.response.status) {
               case 403:
@@ -93,6 +95,7 @@ function MealPlanDisplay(props) {
           setAddedFoods(response.data.foods);
           countCalories(response);
           setChartCardData(response.data.macroNutrients);
+          getSelectedNutrients()
         }).catch((error) => {
           switch (error.response.status) {
               case 403:
@@ -127,6 +130,7 @@ function MealPlanDisplay(props) {
             setAddedFoods(response.data.foods);
             countCalories(response);
             setChartCardData(response.data.macroNutrients);
+            getSelectedNutrients()
           }).catch((error) => {
             switch (error.response.status) {
                 case 403:
@@ -153,6 +157,7 @@ function MealPlanDisplay(props) {
             setAddedFoods(response.data.foods);
             setChartCardData(response.data.macroNutrients);
             countCalories(response);
+            getSelectedNutrients()
           }).catch((error) => {
             switch (error.response.status) {
                 case 403:
@@ -182,6 +187,7 @@ function MealPlanDisplay(props) {
             setAddedFoods(response.data.foods);
             setChartCardData(response.data.macroNutrients);
             countCalories(response);
+            getSelectedNutrients();
           }).catch((error) => {
             switch (error.response.status) {
                 case 403:
@@ -193,18 +199,46 @@ function MealPlanDisplay(props) {
   };
 
 
-  // const selectCustomNutrients = () => {
-  //   const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-  //   try {
-  //     axios
-  //       .post("http://localhost:8080/select-custom-nutrient", config)
-  //       .then((response) => {
-  //         console.log(response)
-  //       })
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  const getSelectedNutrients = () =>{
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+    const date = { date: props.selectedDate };
+    axios
+      .post("http://localhost:8080/getselectednutrients", date, config)
+      .then((response) => {
+        setSelectedNutrients(response.data)
+      })
+    }
+
+  const selectCustomNutrients = () => {
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+    console.log(selectedNutrients);
+    let selected = []
+    for (let nutrient of selectedNutrients){
+      let dict = {};
+      dict["nutrientID"] = nutrient;
+      selected.push(dict)
+    }
+    const selectedNutrientList ={selectedNutrientList : selected};
+    const date = { date: props.selectedDate }
+    try {
+      axios
+        .post("http://localhost:8080/select-custom-nutrient", selectedNutrientList, config)
+        .then((response) => {
+          axios
+            .post("http://localhost:8080/getselectednutrients", date, config)
+            .then((response) => {
+              setSelectedNutrients(response.data)
+              console.log(response.data);
+              
+            })}
+        )} catch (err) {
+      console.log(err);
+    }
+  }
+
+  function onChange(checkedValues) {
+    setSelectedNutrients(checkedValues)
+  }
 
   const macroNutrientsContainer = {
     display: "flex",
@@ -413,7 +447,7 @@ function MealPlanDisplay(props) {
     </div>
     </Col>
     <Col span={6} >
-      <CustomNutrients selectedDate={props.selectedDate}>
+      <CustomNutrients selectedNutrients={selectedNutrients} onChange={onChange} selectCustomNutrients={selectCustomNutrients} getSelectedNutrients={getSelectedNutrients}>
       </CustomNutrients>
     </Col>
     </Row>

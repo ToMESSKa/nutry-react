@@ -17,7 +17,16 @@ function CustomNutrients(props) {
 
 
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [selectedNutrients, setSelectedNutrients] = useState({});
+
+  useEffect(() => {
+    props.getSelectedNutrients();
+  },[props.selectedDate]);
+  
+  useEffect(() => {
+    props.getSelectedNutrients();
+  },[]);
+
+
 
   const modalStyle = {
     content: {
@@ -43,46 +52,57 @@ function CustomNutrients(props) {
     setIsOpen(false);
   }
 
-  function onChange(checkedValues) {
-    setSelectedNutrients(checkedValues)
-    console.log(selectedNutrients);
-    console.log(checkedValues)
-  }
+  // function onChange(checkedValues) {
+  //   props.setSelectedNutrients(checkedValues)
+  // }
 
-  const selectCustomNutrients = () => {
-    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-    console.log(selectedNutrients);
-    let selected = []
-    for (let nutrient of selectedNutrients){
-      let dict = {};
-      dict["nutrientID"] = nutrient;
-      selected.push(dict)
-    }
-    const selectedNutrientList ={selectedNutrientList : selected};
-    const date = { date: props.selectedDate }
-    try {
-      axios
-        .post("http://localhost:8080/select-custom-nutrient", selectedNutrientList, config)
-        .then((response) => {
-          axios
-            .post("http://localhost:8080/getselectednutrients", date, config)
-            .then((response) => {
-              console.log(response);
-            })}
-        )} catch (err) {
-      console.log(err);
-    }
-  }
+  // const getSelectedNutrients = () =>{
+  //   const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+  //   const date = { date: props.selectedDate };
+  //   axios
+  //     .post("http://localhost:8080/getselectednutrients", date, config)
+  //     .then((response) => {
+  //       setSelectedNutrients(response.data)
+  //     })
+  //   }
+
+  // const selectCustomNutrients = () => {
+  //   const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+  //   console.log(selectedNutrients);
+  //   let selected = []
+  //   for (let nutrient of selectedNutrients){
+  //     let dict = {};
+  //     dict["nutrientID"] = nutrient;
+  //     selected.push(dict)
+  //   }
+  //   const selectedNutrientList ={selectedNutrientList : selected};
+  //   const date = { date: props.selectedDate }
+  //   try {
+  //     axios
+  //       .post("http://localhost:8080/select-custom-nutrient", selectedNutrientList, config)
+  //       .then((response) => {
+  //         axios
+  //           .post("http://localhost:8080/getselectednutrients", date, config)
+  //           .then((response) => {
+  //             setSelectedNutrients(response.data)
+  //             console.log(response.data);
+              
+  //           })}
+  //       )} catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   return (
     <div className = "custom-nutrients">
     <Card>
-    <Button onClick={selectCustomNutrients}>
-          Add new nutient
-        </Button>
-
+    <Button type="primary" onClick={openModal}>Add new nutient</Button>
+        {props.selectedNutrients.map((nutrient) => (
+          <Row>
+            {nutrient.nutrientName}, {nutrient.amount}
+          </Row>
+        ))}
         <div>
-      <button onClick={openModal}>Open Modal</button>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -90,7 +110,7 @@ function CustomNutrients(props) {
         style={modalStyle}
         contentLabel="Example Modal"
       >
-        <Checkbox.Group style={{ width: '100%' }} onChange={onChange}>
+        <Checkbox.Group style={{ width: '100%' }} onChange={props.onChange}>
         <Row>
         <Checkbox value="1087">Calcium</Checkbox>
         </Row>
@@ -100,7 +120,10 @@ function CustomNutrients(props) {
         <Row>
         <Checkbox value="1089">Iron</Checkbox>
         </Row>
-    <Button onClick={selectCustomNutrients}>Select nutrients</Button>
+    <Button onClick={() =>{
+      props.selectCustomNutrients(); 
+      closeModal()}}
+      >Select nutrients</Button>
   </Checkbox.Group>,
       </Modal>
     </div>
