@@ -13,6 +13,7 @@ import Statistics from "./Statistics";
 import Loader from 'react-promise-loader'
 import { usePromiseTracker } from 'react-promise-tracker';
 import Login from "../login/Login";
+import AppFooter from "../../footer/AppFooter";
 
 function MainPage({ children }) {
 
@@ -36,6 +37,7 @@ function MainPage({ children }) {
       </BrowserRouter>
 
       {children}
+    <AppFooter/>
     </div>
   );
 }
