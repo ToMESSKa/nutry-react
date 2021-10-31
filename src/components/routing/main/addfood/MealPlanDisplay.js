@@ -193,18 +193,18 @@ function MealPlanDisplay(props) {
   };
 
 
-  const selectCustomNutrients = () => {
-    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-    try {
-      axios
-        .post("http://localhost:8080/select-custom-nutrients", config)
-        .then((response) => {
-          setSelectedNutrients()
-        })
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // const selectCustomNutrients = () => {
+  //   const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+  //   try {
+  //     axios
+  //       .post("http://localhost:8080/select-custom-nutrient", config)
+  //       .then((response) => {
+  //         console.log(response)
+  //       })
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
   const macroNutrientsContainer = {
     display: "flex",
@@ -413,10 +413,7 @@ function MealPlanDisplay(props) {
     </div>
     </Col>
     <Col span={6} >
-      <CustomNutrients>
-        <Button onClick={selectCustomNutrients}>
-          Add new nutient
-        </Button>
+      <CustomNutrients selectedDate={props.selectedDate}>
       </CustomNutrients>
     </Col>
     </Row>
