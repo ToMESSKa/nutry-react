@@ -5,7 +5,7 @@ import "./AppFooter.css";
 
 function AppFooter() {
     return (
-        <div>
+        <div className="app-footer">
             <div style={{ height: "4rem" }}></div>
             <Footer>
                 <Space>

@@ -49,7 +49,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .App-load-logo {
     animation: App-logo-spin infinite 40s linear;
   }
 }
@@ -61,11 +61,6 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.App-logo {
-  max-width: 50%;
-  max-height: 50%;
 }
 
 .small-logo {

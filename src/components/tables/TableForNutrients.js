@@ -13,7 +13,7 @@ function TableForNutrients({ data, filterCriteria }) {
   
   return (
     <div className="nutrient-table">
-    <Table  bordered hover >
+    <Table  bordered hover className="ant-nutrient-table">
       <thead>
         <tr>
           <th colSpan="3" style={tableHeaderStyle}>
@@ -25,6 +25,7 @@ function TableForNutrients({ data, filterCriteria }) {
       <tbody>
         {data
           .filter((nutrient) => nutrient.category ===  filterCriteria )
+          .sort((a,b) => (a.nutrientName > b.nutrientName) ? 1 : ((b.nutrientName > a.nutrientName) ? -1 : 0))
           .map((nutrient) => (
             <tr key={nutrient.nutrientId2}>
               <td>{nutrient.nutrientName}</td>

@@ -1,4 +1,4 @@
-import {Card, Space, Col, Row, Button } from "antd";
+import {Card, Space, Col, Row, Button, Divider} from "antd";
 import React, { useState, useEffect } from "react";
 import {} from "react-router-dom";
 import axios from "axios";
@@ -17,8 +17,10 @@ import { GiWheat, GiGlassShot, GiBiceps } from "react-icons/gi";
 import { ImDroplet } from "react-icons/im";
 import { trackPromise } from 'react-promise-tracker';
 import { usePromiseTracker } from "react-promise-tracker";
-import Logo from "../../../logo/Logo"
 import CustomNutrients from "./CustomNutrients";
+import LoadLogo from "../../../logo/LoadLogo";
+import BarChartAntDesign from "../../../charts/BarChartAntDesign";
+
 
 
 function MealPlanDisplay(props) {
@@ -252,14 +254,17 @@ function MealPlanDisplay(props) {
   };
 
   const caloricInformation = {
-    borderRadius: "15px",
-    height: "200px"
-
+    borderRadius: "15px"
   };
 
-  const logo = {
+  const loadLogo = {
+      borderRadius: "15px",
+      height:"64px"
+  };
+
+  const loadLogoAddFood = {
     borderRadius: "15px",
-    height: "50px"
+    height: "200px"
 
   };
 
@@ -274,33 +279,37 @@ function MealPlanDisplay(props) {
       <div className="caloric-information">
       <Card style={caloricInformation}>
       {(promiseInProgress === true) ?
-      <div style={caloricInformation}><Logo/></div>
-            :
+      <div style={loadLogo}><LoadLogo/></div>
+            :(<div>
         <Row>
-          <Col span={16}>
+          <Col span={24}>
           <CaloriesBar
           recommended={userData.recommended}
           cal={totalCalories}
         ></CaloriesBar>
         </Col>
-        <Col span={8}>
-        <div>
-          Recommended calories: {Math.round(userData.recommended, 0)}{" "}kcal
+            </Row>
+            {/*<Divider orientation={"left"}><Divider/>*/}
+        <Row justify={"space-between"}>
+           <Col flex="50%" >
+        <div >
+            <h1>Recommended calories: {Math.round(userData.recommended, 0)}{" "}kcal</h1>
         </div>
-        </Col>
-        
-        <CalorieCounter
+           </Col>
+            <Col flex="auto" style={{justifyItems:"right"}}>
+                <CalorieCounter
           recommended={Math.round(userData.recommended, 0)}
           addedFoodsList={addedFoods}
           caloriesPassed={Math.round(totalCalories,0)}>
           </CalorieCounter>
-         </Row> 
-        }     
+            </Col>
+        </Row>
+          </div>)}
          </Card>
          </div>
 
-        <Row className="macroNutrientsContainer" gutter={[20,20]}>
-            <Col>
+        <Row className="macroNutrientsContainer" gutter={[10,20]} >
+            <Col flex="25%">
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["carbohydrate"],
@@ -308,15 +317,13 @@ function MealPlanDisplay(props) {
                 icon: <GiWheat />,
                 color: "#FFBB28",
               }}>
-              <BarChartOneLine
-                data={{
-                  color: "#FF8042",
-                  amount: chartCardData["carbohydrate"],
+              <BarChartAntDesign
+                data={{color: "#FF8042", amount: chartCardData["carbohydrate"], recommended:100,
                 }}>
-              </BarChartOneLine>
+              </BarChartAntDesign>
             </ChartCardForBarOneLine>
             </Col>
-            <Col>
+            <Col flex="25%">
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["protein"],
@@ -325,12 +332,12 @@ function MealPlanDisplay(props) {
                 color: "#00C49F",
               }}
             >
-              <BarChartOneLine
-                data={{ color: "#00C49F", amount: chartCardData["protein"] }}
-              ></BarChartOneLine>
+              <BarChartAntDesign
+                data={{ color: "#00C49F", amount: chartCardData["protein"], recommended:100, }}
+              ></BarChartAntDesign>
             </ChartCardForBarOneLine>
             </Col>
-        <Col>
+        <Col flex="25%">
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["fat"],
@@ -339,12 +346,13 @@ function MealPlanDisplay(props) {
                 color: "#FFBB28",
               }}
             >
-              <BarChartOneLine
-                data={{ color: "#FFBB28", amount: chartCardData["fat"] }}
-              ></BarChartOneLine>
+              <BarChartAntDesign
+                data={{ color: "#FFBB28", amount: chartCardData["fat"], recommended:100, }}
+              ></BarChartAntDesign>
             </ChartCardForBarOneLine>
         </Col>
-        <Col>
+
+        <Col flex="25%">
             <ChartCardForBarOneLine
               chartCardData={{
                 amount: chartCardData["fat"],
@@ -353,9 +361,9 @@ function MealPlanDisplay(props) {
                 color: "#FFBB28",
               }}
             >
-              <BarChartOneLine
-                data={{ color: "#0088FE", amount: chartCardData["fat"] }}
-              ></BarChartOneLine>
+              <BarChartAntDesign
+                data={{ color: "#0088FE", amount: chartCardData["fat"], recommended:100, }}
+              ></BarChartAntDesign>
             </ChartCardForBarOneLine>
         </Col>
           </Row>
@@ -376,7 +384,7 @@ function MealPlanDisplay(props) {
       </Row>
       </div>
       {(promiseInProgress === true) ?
-           <Logo/>
+          <div style={loadLogoAddFood}><LoadLogo/></div>
             :
       <div className="food-table" >
           {addedFoods.map((food, index) => (
