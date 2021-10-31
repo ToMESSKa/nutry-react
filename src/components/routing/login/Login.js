@@ -56,6 +56,7 @@ function Login() {
                 <Row>
                     <Brand />
                 </Row>
+                <div style={{height:"1rem"}}></div>
                 <Row>
                     <Col span={14} offset={5}>
                         <Row>
