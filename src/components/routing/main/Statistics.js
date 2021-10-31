@@ -16,7 +16,6 @@ import axios from "axios";
 import TableNutrients from "../../tables/TableNutrients";
 
 function Statistics({ children }) {
-  //const [chartCardData, setChartCardData] = useState({});
   const [energyHistoryData, setEnergyHistoryData] = useState([]);
   const [weightHistoryData, setWeightHistoryData] = useState([]);
   const [waterHistoryData, setWaterHistoryData] = useState([]);
@@ -67,20 +66,9 @@ function Statistics({ children }) {
     axios
       .post("http://localhost:8080/get-avg-nutrients-for-period", period)
       .then((response) => {
-        //console.log(response.data)
         setAvgNutrients([ ...response.data ]);
       });
   };
-
-/*   const getRecommendedNutrients = (period) => {
-    axios
-      .post("http://localhost:8080/get-recommended-nutrients", period)
-      .then((response) => {
-        console.log(response.data)
-        setRecommendedNutrients([ ...response.data ]);
-      });
-  };
- */
 
   const handlePeriodChange = (event) => {
     event.preventDefault();
