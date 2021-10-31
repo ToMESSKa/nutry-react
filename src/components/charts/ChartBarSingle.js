@@ -9,10 +9,7 @@ import {
 
 
 function ChartBarSingle({ data }) {
-  console.log(typeof data.recommended);
-  console.log(data.recommended)
-  console.log(typeof data.consumed);
-  console.log(data.consumed);
+
   const data1 = [
     {
       name: "Page A",

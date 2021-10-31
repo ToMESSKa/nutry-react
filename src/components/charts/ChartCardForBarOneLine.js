@@ -8,7 +8,7 @@ import Logo from "../../components/logo/Logo"
 
 const cardForBar = {
     background: "white",
-    width: "380px",
+    width: "300px",
     height: "100px",
     padding: "5px",
     display: "flex",

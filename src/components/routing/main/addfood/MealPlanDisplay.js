@@ -18,6 +18,7 @@ import { ImDroplet } from "react-icons/im";
 import { trackPromise } from 'react-promise-tracker';
 import { usePromiseTracker } from "react-promise-tracker";
 import Logo from "../../../logo/Logo"
+import CustomNutrients from "./CustomNutrients";
 
 
 function MealPlanDisplay(props) {
@@ -26,6 +27,7 @@ function MealPlanDisplay(props) {
   const [totalCalories, setTotalCalories] = useState(0);
   const [chartCardData, setChartCardData] = useState({});
   const { promiseInProgress } = usePromiseTracker();
+  const {selectedNutrients, setSelectedNutrients} = useState({});
 
   useEffect(() => {
     getUserDetails();
@@ -190,6 +192,20 @@ function MealPlanDisplay(props) {
       });
   };
 
+
+  const selectCustomNutrients = () => {
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+    try {
+      axios
+        .post("http://localhost:8080/select-custom-nutrients", config)
+        .then((response) => {
+          setSelectedNutrients()
+        })
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const macroNutrientsContainer = {
     display: "flex",
     gap: "50px",
@@ -217,6 +233,8 @@ function MealPlanDisplay(props) {
 
 
   return (
+    <Row>
+    <Col span={18}>
     <div className = "food-display">
       
       <div className="caloric-information">
@@ -391,8 +409,17 @@ function MealPlanDisplay(props) {
     }
     </div>
     </Card>
-  
+
     </div>
+    </Col>
+    <Col span={6} >
+      <CustomNutrients>
+        <Button onClick={selectCustomNutrients}>
+          Add new nutient
+        </Button>
+      </CustomNutrients>
+    </Col>
+    </Row>
   );
 }
 
