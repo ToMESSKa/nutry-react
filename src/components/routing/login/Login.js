@@ -49,6 +49,7 @@ function Login() {
     return (
         <div className="landing">
             <Layout>
+                <div style={{height:"2rem"}}></div>
                 <Row>
                     <Logo />
                 </Row>

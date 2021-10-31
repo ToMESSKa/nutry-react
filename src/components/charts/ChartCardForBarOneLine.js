@@ -5,10 +5,11 @@ import {Card, Space, Col, Row, Button } from "antd";
 import { trackPromise } from 'react-promise-tracker';
 import { usePromiseTracker } from "react-promise-tracker";
 import Logo from "../../components/logo/Logo"
+import LoadLogo from "../logo/LoadLogo";
 
 const cardForBar = {
     background: "white",
-    width: "380px",
+    minWidth: "200px",
     height: "100px",
     padding: "5px",
     display: "flex",
@@ -24,7 +25,7 @@ function ChartCardForBar({children, chartCardData}) {
     
     <div style={cardForBar}>
       {(promiseInProgress === true) ?
-           <Logo/>
+           <LoadLogo/>
             :
             <div>
       <h4>{chartCardData.icon} {Math.round(chartCardData.amount)} g </h4>
