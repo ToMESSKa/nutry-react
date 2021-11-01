@@ -239,7 +239,8 @@ function MealPlanDisplay(props) {
   }
 
   function onChange(checkedValues) {
-    setSelectedNutrients(checkedValues)
+    console.log(checkedValues);
+    setSelectedNutrients(checkedValues);
   }
 
   const macroNutrientsContainer = {

@@ -13,7 +13,17 @@ import Modal from 'react-modal';
 
 
 
+
 function CustomNutrients(props) {
+  const plainOptions = [
+    { label: 'Calcium', value: "1087", key: "1087"  },
+    { label: 'Magnesium', value: "1090", key: "1090" },
+    { label: 'Iron', value: "1089", key: "1089" },
+  ];
+
+
+  const defaultCheckedList = ['1090'];
+  const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
 
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -51,47 +61,7 @@ function CustomNutrients(props) {
   function closeModal() {
     setIsOpen(false);
   }
-
-  // function onChange(checkedValues) {
-  //   props.setSelectedNutrients(checkedValues)
-  // }
-
-  // const getSelectedNutrients = () =>{
-  //   const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-  //   const date = { date: props.selectedDate };
-  //   axios
-  //     .post("http://localhost:8080/getselectednutrients", date, config)
-  //     .then((response) => {
-  //       setSelectedNutrients(response.data)
-  //     })
-  //   }
-
-  // const selectCustomNutrients = () => {
-  //   const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-  //   console.log(selectedNutrients);
-  //   let selected = []
-  //   for (let nutrient of selectedNutrients){
-  //     let dict = {};
-  //     dict["nutrientID"] = nutrient;
-  //     selected.push(dict)
-  //   }
-  //   const selectedNutrientList ={selectedNutrientList : selected};
-  //   const date = { date: props.selectedDate }
-  //   try {
-  //     axios
-  //       .post("http://localhost:8080/select-custom-nutrient", selectedNutrientList, config)
-  //       .then((response) => {
-  //         axios
-  //           .post("http://localhost:8080/getselectednutrients", date, config)
-  //           .then((response) => {
-  //             setSelectedNutrients(response.data)
-  //             console.log(response.data);
-              
-  //           })}
-  //       )} catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  
 
   return (
     <div className = "custom-nutrients">
@@ -109,22 +79,26 @@ function CustomNutrients(props) {
         onRequestClose={closeModal}
         style={modalStyle}
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
-        <Checkbox.Group style={{ width: '100%' }} onChange={props.onChange}>
+        {/* <Checkbox.Group style={{ width: '100%' }} onChange={props.onChange} >
+        <Row> */}
+        <div>
+        <Checkbox.Group options={plainOptions} value={checkedList} onChange={props.onChange} />
+        {/* <Checkbox.Group style={{ width: '100%' }} onChange={props.onChange} >
+        <Checkbox checked={true} value="1087">Calcium</Checkbox> */}
+        </div>
+        {/* </Row>
         <Row>
-        <Checkbox value="1087">Calcium</Checkbox>
+        <Checkbox defaultChecked="true"  value="1090">Magnesium</Checkbox>
         </Row>
         <Row>
-        <Checkbox value="1090">Magnesium</Checkbox>
-        </Row>
-        <Row>
-        <Checkbox value="1089">Iron</Checkbox>
-        </Row>
+        <Checkbox defaultChecked={true} value="1089">Iron</Checkbox>
+        </Row> */}
     <Button onClick={() =>{
       props.selectCustomNutrients(); 
       closeModal()}}
       >Select nutrients</Button>
-  </Checkbox.Group>,
       </Modal>
     </div>
     </Card>
