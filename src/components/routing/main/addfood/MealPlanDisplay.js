@@ -30,6 +30,8 @@ function MealPlanDisplay(props) {
   const [chartCardData, setChartCardData] = useState({});
   const { promiseInProgress } = usePromiseTracker();
   const [selectedNutrients, setSelectedNutrients] = useState([]);
+  const [defaultCheckedValues, setDefaultCheckedValues] = useState(["1090", "1087"]);
+  const [checkedValues, setCheckedValues] = React.useState(defaultCheckedValues);
 
   useEffect(() => {
     getUserDetails();
@@ -69,7 +71,6 @@ function MealPlanDisplay(props) {
   const getUserDetails = () => {
     try {
       axios.get("http://localhost:8080/getuserdata").then((response) => {
-        console.log(response.data)
         setUserData(response.data);
       });
     } catch (err) {
@@ -87,7 +88,6 @@ function MealPlanDisplay(props) {
   };
 
   const handleDateSelect = () => {
-    console.log(props.selectedDate);
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     const newDate = { date: moment(props.selectedDate).format("YYYY-MM-DD") };
     try {
@@ -116,8 +116,6 @@ function MealPlanDisplay(props) {
 
   const changeAmountByButton = (event) => {
       const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-
-    console.log("change")
     const newAmount = {
       consumedFoodId: event.target.dataset.consumedfoodid,
       direction: event.target.innerText,
@@ -152,7 +150,6 @@ function MealPlanDisplay(props) {
       .post("http://localhost:8080/deletefood", foodToDelete)
       .then((response) => {
         const date = { date: props.selectedDate };
-        console.log(date);
         axios
           .post("http://localhost:8080/updatemealplan", date, config)
           .then((response) => {
@@ -207,15 +204,17 @@ function MealPlanDisplay(props) {
     axios
       .post("http://localhost:8080/getselectednutrients", date, config)
       .then((response) => {
-        setSelectedNutrients(response.data)
+        setSelectedNutrients(response.data);
+        console.log(response.data)
       })
     }
 
+  
+
   const selectCustomNutrients = () => {
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-    console.log(selectedNutrients);
     let selected = []
-    for (let nutrient of selectedNutrients){
+    for (let nutrient of checkedValues){
       let dict = {};
       dict["nutrientID"] = nutrient;
       selected.push(dict)
@@ -230,16 +229,22 @@ function MealPlanDisplay(props) {
             .post("http://localhost:8080/getselectednutrients", date, config)
             .then((response) => {
               setSelectedNutrients(response.data)
-              console.log(response.data);
-              
+              setCheckedNutrients(response.data)
             })}
         )} catch (err) {
       console.log(err);
     }
   }
 
+
+  const setCheckedNutrients = (nutrients) => {
+    for (let nutrient of nutrients){
+      console.log(nutrient.nutrientID)
+    }
+  }
+
   function onChange(checkedValues) {
-    console.log(checkedValues);
+    setCheckedValues(checkedValues)
     setSelectedNutrients(checkedValues);
   }
 
@@ -456,7 +461,7 @@ function MealPlanDisplay(props) {
     </div>
     </Col>
     <Col span={6} >
-      <CustomNutrients selectedNutrients={selectedNutrients} onChange={onChange} selectCustomNutrients={selectCustomNutrients} getSelectedNutrients={getSelectedNutrients}>
+      <CustomNutrients checkedValues={checkedValues} selectedNutrients={selectedNutrients} onChange={onChange} selectCustomNutrients={selectCustomNutrients} getSelectedNutrients={getSelectedNutrients}>
       </CustomNutrients>
     </Col>
     </Row>

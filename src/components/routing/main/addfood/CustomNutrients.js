@@ -16,14 +16,14 @@ import Modal from 'react-modal';
 
 function CustomNutrients(props) {
   const plainOptions = [
-    { label: 'Calcium', value: "1087", key: "1087"  },
+    { label: 'Calcium', value: "1087", key: "1087" },
     { label: 'Magnesium', value: "1090", key: "1090" },
     { label: 'Iron', value: "1089", key: "1089" },
   ];
 
 
-  const defaultCheckedList = ['1090'];
-  const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
+  // const defaultCheckedList = ['1090'];
+  // const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
 
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -84,7 +84,7 @@ function CustomNutrients(props) {
         {/* <Checkbox.Group style={{ width: '100%' }} onChange={props.onChange} >
         <Row> */}
         <div>
-        <Checkbox.Group options={plainOptions} value={checkedList} onChange={props.onChange} />
+        <Checkbox.Group options={plainOptions} value={props.checkedValues} onChange={props.onChange} />
         {/* <Checkbox.Group style={{ width: '100%' }} onChange={props.onChange} >
         <Checkbox checked={true} value="1087">Calcium</Checkbox> */}
         </div>
