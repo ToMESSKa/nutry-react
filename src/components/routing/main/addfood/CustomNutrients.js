@@ -32,10 +32,6 @@ function CustomNutrients(props) {
     props.getSelectedNutrients();
   },[props.selectedDate]);
   
-  useEffect(() => {
-    props.getSelectedNutrients();
-  },[]);
-
 
 
   const modalStyle = {
@@ -66,7 +62,8 @@ function CustomNutrients(props) {
   return (
     <div className = "custom-nutrients">
     <Card>
-    <Button type="primary" onClick={openModal}>Add new nutient</Button>
+    <Button type="primary" onClick={()=> {
+      openModal()}}>Add new nutient</Button>
         {props.selectedNutrients.map((nutrient) => (
           <Row>
             {nutrient.nutrientName}, {nutrient.amount}

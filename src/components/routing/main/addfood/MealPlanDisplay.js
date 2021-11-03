@@ -30,7 +30,7 @@ function MealPlanDisplay(props) {
   const [chartCardData, setChartCardData] = useState({});
   const { promiseInProgress } = usePromiseTracker();
   const [selectedNutrients, setSelectedNutrients] = useState([]);
-  const [defaultCheckedValues, setDefaultCheckedValues] = useState(["1090", "1087"]);
+  const [defaultCheckedValues, setDefaultCheckedValues] = useState();
   const [checkedValues, setCheckedValues] = React.useState(defaultCheckedValues);
 
   useEffect(() => {
@@ -43,6 +43,11 @@ function MealPlanDisplay(props) {
   useEffect(() => {
     getAddedFoods();
   },[props.addedFoods]);
+
+  useEffect(() => {
+    updateCheckedNutrients();
+  },[]);
+
 
   const getAddedFoods = () => {
       const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
@@ -205,7 +210,6 @@ function MealPlanDisplay(props) {
       .post("http://localhost:8080/getselectednutrients", date, config)
       .then((response) => {
         setSelectedNutrients(response.data);
-        console.log(response.data)
       })
     }
 
@@ -229,7 +233,6 @@ function MealPlanDisplay(props) {
             .post("http://localhost:8080/getselectednutrients", date, config)
             .then((response) => {
               setSelectedNutrients(response.data)
-              setCheckedNutrients(response.data)
             })}
         )} catch (err) {
       console.log(err);
@@ -237,15 +240,23 @@ function MealPlanDisplay(props) {
   }
 
 
-  const setCheckedNutrients = (nutrients) => {
-    for (let nutrient of nutrients){
-      console.log(nutrient.nutrientID)
-    }
-  }
+
+  const updateCheckedNutrients = () => {
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+    const date = { date: props.selectedDate }
+    axios
+      .post("http://localhost:8080/getselectednutrients", date, config)
+      .then((response) => {
+        const newCheckedValues = [];
+          for (let nutrient of response.data){
+            newCheckedValues.push("" + nutrient.nutrientID)
+          }
+          setCheckedValues(newCheckedValues);
+          })
+        }
 
   function onChange(checkedValues) {
     setCheckedValues(checkedValues)
-    setSelectedNutrients(checkedValues);
   }
 
   const macroNutrientsContainer = {
