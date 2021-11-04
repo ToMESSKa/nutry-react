@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import "antd/dist/antd.css";
+import { usePromiseTracker } from "react-promise-tracker";
+
+
+
 
 ReactDOM.render(
   <React.StrictMode>

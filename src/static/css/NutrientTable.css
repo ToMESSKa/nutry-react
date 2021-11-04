@@ -1,0 +1,45 @@
+
+.ant-nutrient-table table {
+    background: white;
+    width: 700px;
+    
+  }
+
+.nutrient-table {
+    width: auto;
+    height: auto;
+}
+
+.ant-nutrient-table td:first-child {
+    text-align: left; 
+    width: 400px;
+
+}
+.ant-nutrient-table td:nth-child(2) {
+    width: 150px;
+}
+
+.ant-nutrient-table td:nth-child(3) {
+    width: 150px;
+}
+
+
+/* td .recharts-responsive-container  {
+    width: 101px;
+}
+
+td .recharts-responsive-container .recharts-wrapper {
+    width: 100px;
+}
+
+td .recharts-responsive-container .recharts-wrapper svg {
+    width: 100px;
+} */
+
+.ant-nutrient-table thead tr th {
+    font-size: 30px;
+}
+
+.ant-nutrient-table tbody tr td {
+    font-size: 18px;
+}

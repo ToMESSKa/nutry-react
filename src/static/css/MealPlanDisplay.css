@@ -1,0 +1,62 @@
+.food-card {
+  height: 50px;
+  width: auto;
+  display: inline-block;
+  align-items: flex-end;
+}
+
+.food-image {
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.calorie-button-rigth {
+  size: 10%;
+}
+
+.macroNutrientsContainer {
+  border-radius: 25px;
+  /*display: flex;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  margin: 0;
+  /*justify-content: space-between;*/
+}
+
+.caloric-information {
+  padding-top: 10px;
+}
+
+.calendar {
+  padding-top: 10px;
+}
+
+.column-titles {
+  font-weight: 10000;
+  background-color: "#efefef";
+}
+
+.food-table {
+  padding-top: 10px;
+  min-height: 200px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-load-logo {
+    animation: App-logo-spin infinite 40s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.small-logo {
+  height: 50px;
+}

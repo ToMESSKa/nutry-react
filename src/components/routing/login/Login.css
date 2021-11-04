@@ -1,0 +1,23 @@
+.login-form {
+    max-width: 1000px;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+.login-form-title {
+    font-size: 1.2rem;
+}
+
+p{
+    font-size: 0.8rem
+}
+
+.ant-card{
+    border-radius: 1rem;
+}
+
+body{
+    background: #efefef;
+}
