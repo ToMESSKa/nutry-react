@@ -24,11 +24,9 @@ const ImageUploader = () => {
     formData.append("file", selectedFile);
     axios
       .post("http://localhost:8080/addprofilepicture",formData, config)
-      .then((response) => {
-        console.log(response)
-        setProfileImage(response.data)
-      })
-      .catch();
+      .then((response) => { axios.post("http://localhost:8080/getprofilepicture","text", config).then((response)=> {
+        setProfileImage("http://localhost:8080/profileimages/" + response.data)
+      })})
   };
   
 
@@ -39,7 +37,7 @@ const ImageUploader = () => {
                 <button onClick={uploadProfilePicture}>
                   Upload!
                 </button>
-                <img src={profileImage} alt="Logo" />;
+                <img src={profileImage} alt="profielpic" />;
             </div>
     </div>
   );
