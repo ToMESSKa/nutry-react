@@ -53,13 +53,13 @@ const ImageUploader = () => {
     display: "none"
   }
 
-  const myRefname= useRef(null);
-  const uploadButton= useRef(null);
+  const selectImage= useRef(null);
+ 
 
   const handleClick = (e) => {
     console.log("hey")
     e.preventDefault();
-    myRefname.current.click()
+    selectImage.current.click()
  }
 
 
@@ -71,14 +71,14 @@ const ImageUploader = () => {
           <img className="profile-image" src={profileImage} alt="profielpic" />;
         </Row>
         <Row justify="center" >
-        <Button ref={uploadButton} hidden={hidden} onClick={() => SetHidden(true)} >Update profile picture</Button>
+        <Button hidden={hidden} onClick={() => SetHidden(true)} >Update profile picture</Button>
         </Row>
         {hidden === false ?
         <Row justify="center" >
           </Row> : 
           <div>
           <Row justify="center" >
-          <input hidden={false} ref={myRefname} type="file" style={browseButton}  onChange={onFileChange} />
+          <input ref={selectImage} type="file" style={browseButton}  onChange={onFileChange} />
           <Button onClick={(event) => handleClick(event)}>Select file...</Button>
         </Row> 
         <Row justify="center">
