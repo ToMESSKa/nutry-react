@@ -10,7 +10,6 @@ const ImageUploader = () => {
 
   const [name, setName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const fileInput = useRef(null)
   const [profileImage, setProfileImage] = useState(DefaultProfileImage);
   const [hidden, SetHidden] = React.useState(false);
 
