@@ -407,7 +407,8 @@ function MealPlanDisplay(props) {
           {addedFoods.map((food, index) => (
             <Row key ={food.foodConsumed[0].id} >
               <Col span={3}><img className="food-image" alt="broccoli" src={food.energy / 100 < 1 ?
-                   broccoli: food.energy / 100 < 2.4 ? healthyfood : junkfood }></img></Col>
+                   broccoli: food.energy / 100 < 2.4 ? healthyfood : junkfood }
+              ></img></Col>
               <Col span={3}>{food.description}</Col>
               <Col span={1}>
                  <Button
