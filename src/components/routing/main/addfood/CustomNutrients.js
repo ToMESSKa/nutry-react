@@ -22,10 +22,6 @@ function CustomNutrients(props) {
   ];
 
 
-  // const defaultCheckedList = ['1090'];
-  // const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
-
-
   const [modalIsOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -63,9 +59,9 @@ function CustomNutrients(props) {
     <div className = "custom-nutrients">
     <Card>
     <Button type="primary" onClick={()=> {
-      openModal()}}>Add new nutient</Button>
+      openModal();props.updateCheckedNutrients()}}>Add new nutient</Button>
         {props.selectedNutrients.map((nutrient) => (
-          <Row>
+          <Row key={nutrient.nutrientName}>
             {nutrient.nutrientName}, {nutrient.amount}
           </Row>
         ))}
@@ -78,20 +74,9 @@ function CustomNutrients(props) {
         contentLabel="Example Modal"
         ariaHideApp={false}
       >
-        {/* <Checkbox.Group style={{ width: '100%' }} onChange={props.onChange} >
-        <Row> */}
         <div>
         <Checkbox.Group options={plainOptions} value={props.checkedValues} onChange={props.onChange} />
-        {/* <Checkbox.Group style={{ width: '100%' }} onChange={props.onChange} >
-        <Checkbox checked={true} value="1087">Calcium</Checkbox> */}
         </div>
-        {/* </Row>
-        <Row>
-        <Checkbox defaultChecked="true"  value="1090">Magnesium</Checkbox>
-        </Row>
-        <Row>
-        <Checkbox defaultChecked={true} value="1089">Iron</Checkbox>
-        </Row> */}
     <Button onClick={() =>{
       props.selectCustomNutrients(); 
       closeModal()}}

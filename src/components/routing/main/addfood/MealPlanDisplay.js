@@ -469,11 +469,10 @@ function MealPlanDisplay(props) {
     }
     </div>
     </Card>
-
     </div>
     </Col>
     <Col span={6} >
-      <CustomNutrients checkedValues={checkedValues} selectedNutrients={selectedNutrients} onChange={onChange} selectCustomNutrients={selectCustomNutrients} getSelectedNutrients={getSelectedNutrients}>
+      <CustomNutrients updateCheckedNutrients={updateCheckedNutrients} checkedValues={checkedValues} selectedNutrients={selectedNutrients} onChange={onChange} selectCustomNutrients={selectCustomNutrients} getSelectedNutrients={getSelectedNutrients}>
       </CustomNutrients>
     </Col>
     </Row>
