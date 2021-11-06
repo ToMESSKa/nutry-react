@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import "../../../static/css/ImageUploader.css";
+import DefaultProfileImage from "../../../static/defaultprofileimage.jpg";
+import {Card, Space, Col, Row, Button, Divider} from "antd";
 
 
 const ImageUploader = () => {
@@ -8,15 +11,30 @@ const ImageUploader = () => {
   const [name, setName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const fileInput = useRef(null)
-  const [profileImage, setProfileImage] = useState([]);
+  const [profileImage, setProfileImage] = useState(DefaultProfileImage);
+  const [hidden, SetHidden] = React.useState(false);
+
+  useEffect(() => {
+    loadProfilePicture();
+  },[]);
 
   const onFileChange = (event) => {
-    console.log(event.target.files[0])
     setSelectedFile(event.target.files[0]);
   };
 
 
+  const loadProfilePicture= () => {
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+    axios.post("http://localhost:8080/getprofilepicture","text", config)
+    .then((response)=> {
+      if (response.data !== ""){
+        setProfileImage("http://localhost:8080/profileimages/" + response.data)
+      }
+  })}
+
+
   const uploadProfilePicture = () => {
+    if (selectedFile!== null){
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     const formData = new FormData();
     console.log(formData)
@@ -26,22 +44,52 @@ const ImageUploader = () => {
       .post("http://localhost:8080/addprofilepicture",formData, config)
       .then((response) => { axios.post("http://localhost:8080/getprofilepicture","text", config).then((response)=> {
         setProfileImage("http://localhost:8080/profileimages/" + response.data)
+        SetHidden(false)
       })})
+    }
   };
-  
+
+  const browseButton={
+    display: "none"
+  }
+
+  const myRefname= useRef(null);
+  const uploadButton= useRef(null);
+
+  const handleClick = (e) => {
+    console.log("hey")
+    e.preventDefault();
+    myRefname.current.click()
+ }
+
 
   return (
     <div className="App">
       <div>
-                <input text="x" type="file" onChange={onFileChange} />
-                <button onClick={uploadProfilePicture}>
-                  Upload!
-                </button>
-                <img src={profileImage} alt="profielpic" />;
-            </div>
+        <Col span={6}>
+        <Row justify="center" >
+          <img className="profile-image" src={profileImage} alt="profielpic" />;
+        </Row>
+        <Row justify="center" >
+        <Button ref={uploadButton} hidden={hidden} onClick={() => SetHidden(true)} >Update profile picture</Button>
+        </Row>
+        {hidden === false ?
+        <Row justify="center" >
+          </Row> : 
+          <div>
+          <Row justify="center" >
+          <input hidden={false} ref={myRefname} type="file" style={browseButton}  onChange={onFileChange} />
+          <Button onClick={(event) => handleClick(event)}>Select file...</Button>
+        </Row> 
+        <Row justify="center">
+          <Button onClick={uploadProfilePicture}>Upload!</Button>
+        </Row>
+        </div>
+      }
+        </Col>
+      </div>
     </div>
   );
-
 };
 
 export default ImageUploader;

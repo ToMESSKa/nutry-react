@@ -7,7 +7,6 @@ function Profile({ children }) {
   return (
     <div className="profile">
       <ImageUploader></ImageUploader>
-      <p>Profile</p>
       {children}
     </div>
   );
