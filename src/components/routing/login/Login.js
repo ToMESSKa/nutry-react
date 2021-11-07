@@ -13,6 +13,7 @@ import AddFood from "../main/addfood/AddFood";
 
 
 function Login() {
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const [credentials, setCredentials] = useState({
         email: "",
         password: "",
@@ -30,7 +31,7 @@ function Login() {
 
     const sendCredentials = () => {
         console.log(credentials);
-        axios.post("http://localhost:8080/signin", credentials).then((response) => {
+        axios.post(`${endpoint}/signin`, credentials).then((response) => {
             console.log(credentials);
             localStorage.setItem("token", response.data.token);
             // localStorage.clear();

@@ -21,6 +21,7 @@ function Statistics({ children }) {
   const [waterHistoryData, setWaterHistoryData] = useState([]);
   const [avgMacroNutrients, setAvgMacroNutrients] = useState({});
   const [avgNutrients, setAvgNutrients] = useState([]);
+  const endpoint = process.env.REACT_APP_API_ENDPOINT;
 
   useEffect(() => {
     getEnergyHistoryData({ period: 7 });
@@ -32,7 +33,7 @@ function Statistics({ children }) {
 
   const getEnergyHistoryData = (period) => {
     axios
-      .post("http://localhost:8080/getenergyhistory", period)
+      .post(endpoint + "/getenergyhistory", period)
       .then((response) => {
         setEnergyHistoryData([...response.data]);
       });
@@ -40,7 +41,7 @@ function Statistics({ children }) {
 
   const getWeightHistoryData = (period) => {
     axios
-      .post("http://localhost:8080/getweighthistory", period)
+      .post(endpoint + "/getweighthistory", period)
       .then((response) => {
         setWeightHistoryData([...response.data]);
       });
@@ -48,7 +49,7 @@ function Statistics({ children }) {
 
   const getWaterHistoryData = (period) => {
     axios
-      .post("http://localhost:8080/getwaterhistory", period)
+      .post(endpoint + "/getwaterhistory", period)
       .then((response) => {
         setWaterHistoryData([...response.data]);
       });
@@ -56,7 +57,7 @@ function Statistics({ children }) {
 
   const getAvgMacroNutrients = (period) => {
     axios
-      .post("http://localhost:8080/get-avg-macronutrients-for-period", period)
+      .post(endpoint + "/get-avg-macronutrients-for-period", period)
       .then((response) => {
         setAvgMacroNutrients({ ...response.data });
       });
@@ -64,7 +65,7 @@ function Statistics({ children }) {
 
   const getAvgNutrients = (period) => {
     axios
-      .post("http://localhost:8080/get-avg-nutrients-for-period", period)
+      .post(endpoint + "/get-avg-nutrients-for-period", period)
       .then((response) => {
         setAvgNutrients([ ...response.data ]);
       });

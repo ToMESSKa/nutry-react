@@ -1,37 +1,57 @@
-import React, {} from "react";
+import React from "react";
 import {
   BarChart,
   Bar,
   XAxis,
   YAxis,
   ResponsiveContainer,
+  Label,
+  Line,
+  LabelList,
+  Layer,
 } from "recharts";
 
-
 function ChartBarSingle({ data }) {
-  console.log(typeof data.recommended);
-  console.log(data.recommended)
-  console.log(typeof data.consumed);
-  console.log(data.consumed);
+  // console.log(typeof data.recommended);
+  // console.log(data.recommended)
+  // console.log(typeof data.consumed);
+  // console.log(data.consumed);
   const data1 = [
     {
       name: "Page A",
-      consumed: (data.consumed === null || data.consumed === 0.0) ? 0.0 : (data.consumed > data.recommended || data.consumed === data.recommended) ? 100.0 : data.consumed < data.recommended ? data.consumed/data.recommended*100.0 : 0.0,
-      max:  (data.recommended === 0 || data.recommended === null || data.consumed > data.recommended) ? 0 : (data.recommended-data.consumed)/data.recommended*100.0, //data.consumed>data.crecommended?data.recommended:(data.recommended-data.consumed)/100,  // TODO calc recommended
+      consumed:
+        data.consumed === null || data.consumed === 0.0
+          ? 0.0
+          : data.consumed > data.recommended ||
+            data.consumed === data.recommended
+          ? 100.0
+          : data.consumed < data.recommended
+          ? (data.consumed / data.recommended) * 100.0
+          : 0.0,
+      max:
+        data.recommended === 0 ||
+        data.recommended === null ||
+        data.consumed > data.recommended
+          ? 0
+          : ((data.recommended - data.consumed) / data.recommended) * 100.0, //data.consumed>data.crecommended?data.recommended:(data.recommended-data.consumed)/100,  // TODO calc recommended
     },
   ];
 
-  return (
+  const styleLabel = {
+    whiteSpace: "nowrap",
+    position: "absolute",
+    left: "0px",
+    top: "0px",
+  };
 
+  return (
     // <div>
-    //   {isLoggedIn        
+    //   {isLoggedIn
     //   ? <LogoutButton onClick={this.handleLogoutClick} />
     //   : <LoginButton onClick={this.handleLoginClick} />      }
     // </div>
 
-     <ResponsiveContainer width={data.width} height="40%" aspect={4}>
-
-
+    <ResponsiveContainer width={data.width} height="40%" aspect={4}>
       <BarChart
         width={600}
         height={400}
@@ -45,7 +65,9 @@ function ChartBarSingle({ data }) {
           tick={false}
           axisLine={false}
           width={0}
-        />
+        >
+          {" "}
+        </XAxis>
         <YAxis
           type={"category"}
           orientation={"center"}
@@ -54,14 +76,16 @@ function ChartBarSingle({ data }) {
           axisLine={true}
           width={0}
         />
+
         <Bar
           dataKey="consumed"
           stackId="a"
           fill={data.color}
           radius={[0, 0, 0, 0]}
           stroke={data.stroke}
-          paddingAngle={0} 
-        />
+          paddingAngle={0}
+        ></Bar>
+
         <Bar
           dataKey="max"
           stackId="a"
@@ -69,16 +93,11 @@ function ChartBarSingle({ data }) {
           radius={[0, 0, 0, 0]}
           isAnimationActive={false}
           stroke={data.stroke}
-          paddingAngle={0} 
+          paddingAngle={0}
         />
       </BarChart>
-
-      
-    </ResponsiveContainer> 
-  
-  
-  
-    );
+    </ResponsiveContainer>
+  );
 }
 
 export default ChartBarSingle;

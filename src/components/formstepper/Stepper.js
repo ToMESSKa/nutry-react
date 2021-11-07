@@ -16,6 +16,7 @@ import CredentialForm from "./CredentialForm";
 import axios from "axios";
 
 function Stepper () {
+    const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const [current, setCurrent] = React.useState(0);
     const [userData, setUserData] = useState({
         username: "",
@@ -55,7 +56,7 @@ function Stepper () {
             activity: activity,
             goal: goal
         };
-        axios.post("http://localhost:8080/addusertodatabase", userdb);
+        axios.post(endpoint + "/addusertodatabase", userdb);
         console.log(userdb);
     };
 
