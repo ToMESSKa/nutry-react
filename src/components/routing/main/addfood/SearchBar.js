@@ -8,14 +8,7 @@ const { Search } = Input;
 
 
 function SearchBar(props) {
-  const [params, setParams] = useState({
-    api_Key: "XBPqMYgU4h05cs4NAnjIvXCQc8wldJ4wG3OethYK",
-    food: "",
-    dataType: ["Survey (FNDDS)"],
-    pagesize: 100, //default is 50
-    sortBy: "score", //load fails without .keyword
-    sortOrder: "desc",
-  });
+  const endpoint = process.env.REACT_APP_API_ENDPOINT;
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -40,20 +33,7 @@ function SearchBar(props) {
   };
 
   const makeApiCall = (searchInput) => {
-    var searchUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${encodeURIComponent(
-      searchInput
-    )}&pageSize=${encodeURIComponent(
-      params.pagesize
-    )}&api_key=${encodeURIComponent(
-      params.api_Key
-    )}&dataType=${encodeURIComponent(
-      params.dataType
-    )}&sortBy=${encodeURIComponent(
-      params.sortBy
-    )}&sortOrder=${encodeURIComponent(params.sortOrder)}
-        `;
-
-    axios.get("http://localhost:8080/search/" + searchValue).then((response) => {
+    axios.get(endpoint + "/search/" + searchValue).then((response) => {
       setSearchResult(response.data.foods);
       console.log(response);
     });
@@ -78,10 +58,9 @@ function SearchBar(props) {
         <div className="dataResult">
           {searchResult.map((result) => (
             <p
-              onClick={() => {  //if we pass the result to the onclick, foodData.foodNutrients... will fail with typeerror in NutritionDetails.js
-                props.addFood(result);
+              onClick={() => { 
+                console.log(result);
                 console.log(props.selectedDate)
-                // props.countCalories(result);
                 setSearchResult([]);
               }}
               className="dataItem"
