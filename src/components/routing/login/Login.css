@@ -17,3 +17,7 @@ p{
 .ant-card{
     border-radius: 1rem;
 }
+
+body{
+    background: #efefef;
+}

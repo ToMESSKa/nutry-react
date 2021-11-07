@@ -50,12 +50,14 @@ function Login() {
     return (
         <div className="landing">
             <Layout>
+                <div style={{height:"2rem"}}></div>
                 <Row>
                     <Logo />
                 </Row>
                 <Row>
                     <Brand />
                 </Row>
+                <div style={{height:"1rem"}}></div>
                 <Row>
                     <Col span={14} offset={5}>
                         <Row>
