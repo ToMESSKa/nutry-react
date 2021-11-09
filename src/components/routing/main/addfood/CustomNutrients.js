@@ -29,10 +29,7 @@ function CustomNutrients(props) {
     props.getSelectedNutrients();
   },[props.selectedDate]);
 
-  useEffect(() => {
-    getAllNutrients();
-  },[]);
-  
+
 
 
   const modalStyle = {
