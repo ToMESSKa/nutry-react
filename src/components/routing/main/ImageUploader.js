@@ -12,6 +12,7 @@ const ImageUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [profileImage, setProfileImage] = useState(DefaultProfileImage);
   const [hidden, SetHidden] = React.useState(false);
+  const endpoint = process.env.REACT_APP_API_ENDPOINT;
 
   useEffect(() => {
     loadProfilePicture();
@@ -24,10 +25,10 @@ const ImageUploader = () => {
 
   const loadProfilePicture= () => {
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-    axios.post("http://localhost:8080/getprofilepicture","text", config)
+    axios.post(endpoint + "getprofilepicture","text", config)
     .then((response)=> {
       if (response.data !== ""){
-        setProfileImage("http://localhost:8080/profileimages/" + response.data)
+        setProfileImage(endpoint + "/profileimages/" + response.data)
       }
   })}
 
