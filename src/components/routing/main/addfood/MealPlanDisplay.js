@@ -209,7 +209,7 @@ function MealPlanDisplay(props) {
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     const date = { date: props.selectedDate };
     axios
-      .post("http://localhost:8080/getselectednutrients", date, config)
+      .post(endpoint + "/getselectednutrients", date, config)
       .then((response) => {
         setSelectedNutrients(response.data);
       })
@@ -229,10 +229,10 @@ function MealPlanDisplay(props) {
     const date = { date: props.selectedDate }
     try {
       axios
-        .post("http://localhost:8080/select-custom-nutrient", selectedNutrientList, config)
+        .post(endpoint + "/select-custom-nutrient", selectedNutrientList, config)
         .then((response) => {
           axios
-            .post("http://localhost:8080/getselectednutrients", date, config)
+            .post(endpoint + "/getselectednutrients", date, config)
             .then((response) => {
               setSelectedNutrients(response.data)
             })}
@@ -247,7 +247,7 @@ function MealPlanDisplay(props) {
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     const date = { date: props.selectedDate }
     axios
-      .post("http://localhost:8080/getselectednutrients", date, config)
+      .post(endpoint + "/getselectednutrients", date, config)
       .then((response) => {
         const newCheckedValues = [];
           for (let nutrient of response.data){
