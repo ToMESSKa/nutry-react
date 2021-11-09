@@ -16,6 +16,7 @@ function AddFood() {
 
   const [selectedDate, setSelectedDate] = useState([]);
   const [addedFoods, setAddedFoods] = useState([]);
+  const endpoint = process.env.REACT_APP_API_ENDPOINT;
 
 
   const getCurrentDate = (date) => {
@@ -24,7 +25,6 @@ function AddFood() {
 
 
   const addFood = (foodData) => {
-
     const food2 = {
       fdcId: foodData.fdcId,
       description: foodData.description,
@@ -41,10 +41,11 @@ function AddFood() {
 
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     axios
-      .post("http://localhost:8080/addfoodtomealplan", food2, config)
+      .post(endpoint + "/addfoodtomealplan", food2, config)
       .then((response) => {
+        console.log(response)
         axios
-          .post("http://localhost:8080/updatemealplan", date, config)
+          .post(endpoint + "/updatemealplan", date, config)
           .then((response) => {
             setAddedFoods(response.data.foods);
           }).catch((error) => {

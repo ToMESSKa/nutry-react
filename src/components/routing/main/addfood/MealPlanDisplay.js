@@ -24,6 +24,7 @@ import BarChartAntDesign from "../../../charts/BarChartAntDesign";
 
 
 function MealPlanDisplay(props) {
+  const endpoint = process.env.REACT_APP_API_ENDPOINT;
   const [addedFoods, setAddedFoods] = useState([]);
   const [userData, setUserData] = useState({});
   const [totalCalories, setTotalCalories] = useState(0);
@@ -55,7 +56,7 @@ function MealPlanDisplay(props) {
       const date = { date: props.selectedDate };
       trackPromise(
       axios
-        .post("http://localhost:8080/updatemealplan", date, config)
+        .post(endpoint + "/updatemealplan", date, config)
         .then((response) => {
           setAddedFoods(response.data.foods);
           countCalories(response);
@@ -75,7 +76,8 @@ function MealPlanDisplay(props) {
 
   const getUserDetails = () => {
     try {
-      axios.get("http://localhost:8080/getuserdata").then((response) => {
+      axios.get(endpoint + "/getuserdata").then((response) => {
+        console.log(response.data)
         setUserData(response.data);
       });
     } catch (err) {
@@ -97,7 +99,7 @@ function MealPlanDisplay(props) {
     const newDate = { date: moment(props.selectedDate).format("YYYY-MM-DD") };
     try {
       axios
-        .post("http://localhost:8080/updatemealplan", newDate, config)
+        .post(endpoint + "/updatemealplan", newDate, config)
         .then((response) => {
           setAddedFoods(response.data.foods);
           countCalories(response);
@@ -126,11 +128,11 @@ function MealPlanDisplay(props) {
       direction: event.target.innerText,
     };
     axios
-      .post("http://localhost:8080/changeamountoffood", newAmount)
+      .post(endpoint + "/changeamountoffood", newAmount)
       .then((response) => {
         const date = { date: props.selectedDate };
         axios
-          .post("http://localhost:8080/updatemealplan", date, config)
+          .post(endpoint + "/updatemealplan", date, config)
           .then((response) => {
             setAddedFoods(response.data.foods);
             countCalories(response);
@@ -152,11 +154,11 @@ function MealPlanDisplay(props) {
       consumedFoodId: event.target.dataset.consumedfoodid,
     };
     axios
-      .post("http://localhost:8080/deletefood", foodToDelete)
+      .post(endpoint + "/deletefood", foodToDelete)
       .then((response) => {
         const date = { date: props.selectedDate };
         axios
-          .post("http://localhost:8080/updatemealplan", date, config)
+          .post(endpoint + "/updatemealplan", date, config)
           .then((response) => {
             setAddedFoods(response.data.foods);
             setChartCardData(response.data.macroNutrients);
@@ -182,11 +184,11 @@ function MealPlanDisplay(props) {
     };
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     axios
-      .post("http://localhost:8080/changeamountoffoodtocustomvalue", newAmount)
+      .post(endpoint + "/changeamountoffoodtocustomvalue", newAmount)
       .then((response) => {
         const date = { date: props.selectedDate };
         axios
-          .post("http://localhost:8080/updatemealplan", date, config)
+          .post(endpoint + "/updatemealplan", date, config)
           .then((response) => {
             setAddedFoods(response.data.foods);
             setChartCardData(response.data.macroNutrients);
