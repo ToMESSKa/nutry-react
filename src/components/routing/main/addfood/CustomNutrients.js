@@ -31,7 +31,6 @@ function CustomNutrients(props) {
 
 
 
-
   const modalStyle = {
     content: {
       top: '50%',
