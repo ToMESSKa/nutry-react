@@ -25,7 +25,7 @@ const ImageUploader = () => {
 
   const loadProfilePicture= () => {
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-    axios.post(endpoint + "getprofilepicture","text", config)
+    axios.post(endpoint + "/getprofilepicture","text", config)
     .then((response)=> {
       if (response.data !== ""){
         setProfileImage(endpoint + "/profileimages/" + response.data)
@@ -41,9 +41,9 @@ const ImageUploader = () => {
     formData.append("name", name);
     formData.append("file", selectedFile);
     axios
-      .post("http://localhost:8080/addprofilepicture",formData, config)
-      .then((response) => { axios.post("http://localhost:8080/getprofilepicture","text", config).then((response)=> {
-        setProfileImage("http://localhost:8080/profileimages/" + response.data)
+      .post(endpoint + "/addprofilepicture",formData, config)
+      .then((response) => { axios.post(endpoint +  "/getprofilepicture","text", config).then((response)=> {
+        setProfileImage(endpoint + "/profileimages/" + response.data)
         SetHidden(false)
       })})
     }
