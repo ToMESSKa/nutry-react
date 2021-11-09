@@ -15,7 +15,8 @@ import Modal from 'react-modal';
 
 
 function CustomNutrients(props) {
-  const plainOptions = [
+
+  const options = [
     { label: 'Calcium', value: "1087", key: "1087" },
     { label: 'Magnesium', value: "1090", key: "1090" },
     { label: 'Iron', value: "1089", key: "1089" },
@@ -27,6 +28,10 @@ function CustomNutrients(props) {
   useEffect(() => {
     props.getSelectedNutrients();
   },[props.selectedDate]);
+
+  useEffect(() => {
+    getAllNutrients();
+  },[]);
   
 
 
@@ -41,6 +46,16 @@ function CustomNutrients(props) {
     },
   };
 
+  const getAllNutrients = () => {
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+    try {axios
+      .post("http://localhost:8080/getallnutrients")
+      .then((response) => {
+        console.log(response.data)})
+    }catch (err) {
+    console.log(err);
+    }
+  }
 
   function openModal() {
     setIsOpen(true);
@@ -75,7 +90,7 @@ function CustomNutrients(props) {
         ariaHideApp={false}
       >
         <div>
-        <Checkbox.Group options={plainOptions} value={props.checkedValues} onChange={props.onChange} />
+        <Checkbox.Group options={options} value={props.checkedValues} onChange={props.onChange} />
         </div>
     <Button onClick={() =>{
       props.selectCustomNutrients(); 
