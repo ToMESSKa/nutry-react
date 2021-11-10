@@ -6,13 +6,14 @@ import axios from "axios";
 import AppFooter from "../../footer/AppFooter";
 import Logo from "../../logo/Logo";
 import Brand from "../../brand/Brand";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import AddFood from "../main/addfood/AddFood";
 
 
 
 function Login() {
+    let history = useHistory();
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
     const [credentials, setCredentials] = useState({
         email: "",
@@ -37,6 +38,7 @@ function Login() {
             // localStorage.clear();
             console.log(response);
             console.log(localStorage.getItem("token"));
+            history.push("/");
         })
     };
 
@@ -65,7 +67,7 @@ function Login() {
                                 <Card>
                                     <Row>
                                         <Col span={22} offset={2} style={{height: 60}}>
-                                            <h4 align="left" className="login-form-title">About us:</h4>
+                                            <h4 align="left" className="login-form-title">About us</h4>
                                         </Col>
                                     </Row>
                                     <Carousel autoplay>
@@ -119,7 +121,6 @@ function Login() {
                                                             placeholder="Password"/>
                                         </Form.Item>
                                         <Form.Item>
-                                            <Link to={{pathname:"/"}}>
                                             <Button type="primary" htmlType="submit" className="login-form-button"
                                                     onClick={() => {
                                                         sendCredentials();
@@ -128,7 +129,6 @@ function Login() {
                                                     >
                                                 Log in
                                             </Button>
-                                            </Link>
                                             Or <a href="/registration">register now!</a>
                                         </Form.Item>
                                     </Form>

@@ -1,13 +1,16 @@
 import { Menu } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import Login from "../routing/login/Login";
 
 function MenuBar() {
+  let history = useHistory();
 
   const tokenClear = () => {
     localStorage.clear();
-    console.log(localStorage.getItem("token"))
+    console.log(localStorage.getItem("token"));
+    history.push("/login");
+    window.location.reload(false);
   }
 
     return(
@@ -29,7 +32,7 @@ function MenuBar() {
           </Link>
         </Menu.Item>
         <Menu.Item key="logout" onClick={tokenClear}>
-          <Link to={{ pathname: "/login" }} className="nav-link" >
+          <Link to={"/login"}  className="nav-link" >
             Logout
           </Link>
         </Menu.Item>
