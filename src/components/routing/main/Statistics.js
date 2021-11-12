@@ -14,6 +14,8 @@ import ChartSimpleLine from "../../charts/ChartSimpleLine";
 import ChartSimpleArea from "../../charts/ChartSimpleArea";
 import axios from "axios";
 import TableNutrients from "../../tables/TableNutrients";
+import ChartCardForBarOneLine from "../../charts/ChartCardForBarOneLine";
+import BarChartAntDesign from "../../charts/BarChartAntDesign";
 
 function Statistics({ children }) {
   const [energyHistoryData, setEnergyHistoryData] = useState([]);
@@ -117,80 +119,79 @@ function Statistics({ children }) {
           </Row>
           <Row gutter={[40, 40]}>
             <Col>
-              <CardForChartBarSingle
+              <ChartCardForBarOneLine
                 chartCardData={{
                   amount: avgMacroNutrients["carbohydrate"],
                   label: "CARBOHYDRATE",
-                  icon: <GiWheat size={40} />,
+                  icon: <GiWheat/>,
+                    color: "#FFBB28",
                 }}
               >
-                <ChartBarSingle
+                <BarChartAntDesign
                   data={{
                     color: "#FF8042",
-                    consumed: avgMacroNutrients["carbohydrate"],
+                    amount: avgMacroNutrients["carbohydrate"],
                     recommended: 100,
-                    width: "100%",
                   }}
-                ></ChartBarSingle>
-              </CardForChartBarSingle>
+                ></BarChartAntDesign>
+              </ChartCardForBarOneLine>
             </Col>
 
             <Col>
-              <CardForChartBarSingle
+              <ChartCardForBarOneLine
                 chartCardData={{
                   amount: avgMacroNutrients["protein"],
                   label: "PROTEIN",
-                  icon: <GiBiceps size={40} />,
+                  icon: <GiBiceps />,
+                    color: "#00C49F",
                 }}
               >
-                <ChartBarSingle
+                <BarChartAntDesign
                   data={{
                     color: "#00C49F",
-                    consumed: avgMacroNutrients["protein"],
+                    amount: avgMacroNutrients["protein"],
                     recommended: 100,
-                    width: "100%",
                   }}
-                ></ChartBarSingle>
-              </CardForChartBarSingle>
+                ></BarChartAntDesign>
+              </ChartCardForBarOneLine>
             </Col>
 
             <Col>
-              <CardForChartBarSingle
+              <ChartCardForBarOneLine
                 chartCardData={{
                   amount: avgMacroNutrients["fat"],
                   label: "FAT",
-                  icon: <ImDroplet size={40} />,
+                  icon: <ImDroplet />,
+                    color: "#FFBB28",
                 }}
               >
-                <ChartBarSingle
+                <BarChartAntDesign
                   data={{
                     color: "#FFBB28",
-                    consumed: avgMacroNutrients["fat"],
+                    amount: avgMacroNutrients["fat"],
                     recommended: 100,
-                    width: "100%",
                   }}
-                ></ChartBarSingle>
-              </CardForChartBarSingle>
+                ></BarChartAntDesign>
+              </ChartCardForBarOneLine>
             </Col>
 
             <Col>
-              <CardForChartBarSingle
+              <ChartCardForBarOneLine
                 chartCardData={{
                   amount: 2,
                   label: "WATER",
-                  icon: <GiGlassShot size={40} />,
+                  icon: <GiGlassShot />,
+                    color: "#0088FE",
                 }}
               >
-                <ChartBarSingle
+                <BarChartAntDesign
                   data={{
                     color: "#0088FE",
-                    consumed: 2,
+                    amount: 2,
                     recommended: 3,
-                    width: "100%",
-                    stroke: "none",
                   }}
-                ></ChartBarSingle>
-              </CardForChartBarSingle>
+                ></BarChartAntDesign>
+              </ChartCardForBarOneLine>
             </Col>
           </Row>
           <p></p>
