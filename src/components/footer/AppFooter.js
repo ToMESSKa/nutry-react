@@ -5,8 +5,8 @@ import "./AppFooter.css";
 
 function AppFooter() {
     return (
-        <div className="app-footer">
-            <div style={{ height: "4rem" }}></div>
+
+
             <Footer>
                 <Space>
                     <img src={logo} className="footer-logo" alt="Nutry logo" />
@@ -14,7 +14,7 @@ function AppFooter() {
                     <h1 className="footer-text">by Brigi, Tomi & Mate</h1>
                 </Space>
             </Footer>
-        </div>
+
     );
 }
 

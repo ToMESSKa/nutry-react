@@ -27,6 +27,7 @@ function Registration() {
                         </Row>
                     </Col>
                 </Row>
+                <div style={{height:"5rem"}}></div>
                 <AppFooter />
             </Layout>
         </div>

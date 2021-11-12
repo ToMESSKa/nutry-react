@@ -29,7 +29,7 @@ function MainPage({ children }) {
       <AppHeader/>
         <MenuBar/>
          <Switch>
-             {/*<Redirect from="/" to="/add-food" exact component={AddFood}/>*/}
+             <Redirect from="/" to="/add-food" exact component={AddFood}/>
           <Route path="/add-food" exact component={AddFood} />
           <Route path="/statistics" exact component={Statistics} />
           <Route path="/profile" exact component={Profile} />

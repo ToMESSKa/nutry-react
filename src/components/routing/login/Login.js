@@ -139,6 +139,7 @@ function Login() {
                     </Col>
 
                 </Row>
+                <div style={{height:"5rem"}}></div>
                 <AppFooter />
             </Layout>
 

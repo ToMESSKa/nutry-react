@@ -1,6 +1,6 @@
 import {Card, Space, Col, Row, Button, Divider} from "antd";
 import React, { useState, useEffect } from "react";
-import {} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import axios from "axios";
 import broccoli from '../../../../static/broccoli.png';
 import healthyfood from '../../../../static/healthyfood.png';
@@ -49,6 +49,8 @@ function MealPlanDisplay(props) {
     updateCheckedNutrients();
   },[]);
 
+  let history = useHistory();
+
 
   const getAddedFoods = () => {
       const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
@@ -94,6 +96,10 @@ function MealPlanDisplay(props) {
     setTotalCalories(totalCalories);
   };
 
+  // function timeout(delay) {
+  //     return new Promise( res => setTimeout(res, delay) );
+  // }
+
   const handleDateSelect = () => {
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     const newDate = { date: moment(props.selectedDate).format("YYYY-MM-DD") };
@@ -105,16 +111,20 @@ function MealPlanDisplay(props) {
           countCalories(response);
           setChartCardData(response.data.macroNutrients);
           getSelectedNutrients()
-        }).catch((error) => {
+        }).catch(async (error) => {
           switch (error.response.status) {
               case 403:
-                  alert("Not authenticated, please log in!\n" +  "ERROR " + error.response.status);
+                  alert("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                  // await timeout(1000);
+                  // history.push("/login");
+                  // window.location.reload(false);
                   break
               // case 500:
               //     alert("Oops! Something went wrong!\n Please come back later!" +  "ERROR " + error.response.status);
               //     break
               default:
-                  break}
+                  break
+          }
       });
     } catch (err) {
       console.log(err);
@@ -392,13 +402,13 @@ function MealPlanDisplay(props) {
     <div>
       <div className="column-titles" >
       <Row>
-      <Col span={3}><b>calorie density</b></Col>
-      <Col span={3}><b>description</b></Col>
+      <Col span={3}><b>Calorie density</b></Col>
+      <Col span={3}><b>Description</b></Col>
       <Col span={1}></Col>
-      <Col span={2}><b>amount</b></Col>
+      <Col span={2}><b>Amount</b></Col>
       <Col span={1}></Col>
-      <Col span={3}><b>unit</b></Col>
-      <Col span={3}><b>energy</b></Col>
+      <Col span={3}><b>Unit</b></Col>
+      <Col span={3}><b>Energy</b></Col>
       <Col span={3}><b></b></Col>
       </Row>
       </div>

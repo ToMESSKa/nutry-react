@@ -18,22 +18,22 @@ function MenuBar() {
       <Menu mode="horizontal">
         <Menu.Item key="addfood">
           <Link to={"/add-food"} className="nav-link">
-            Meal planning
+            <h1>Meal planning</h1>
           </Link>
         </Menu.Item>
         <Menu.Item key="statistics">
           <Link to={"/statistics"} className="nav-link">
-            Statistics
+            <h1>Statistics</h1>
           </Link>
         </Menu.Item>
         <Menu.Item key="profile">
           <Link to={"/profile"} className="nav-link">
-            Profile
+            <h1>Profile</h1>
           </Link>
         </Menu.Item>
         <Menu.Item key="logout" onClick={tokenClear}>
           <Link to={"/login"}  className="nav-link" >
-            Logout
+            <h1>Logout</h1>
           </Link>
         </Menu.Item>
       </Menu>

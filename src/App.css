@@ -19,3 +19,15 @@
   color: #61dafb;
 }
 
+.ant-layout-footer{
+  background: #efefef !important;
+  margin-top: auto;
+}
+
+body{
+  min-height:100vh;
+display:flex;
+flex-direction:column;
+
+}
+

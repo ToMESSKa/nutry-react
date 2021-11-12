@@ -15,9 +15,13 @@ p{
 }
 
 .ant-card{
-    border-radius: 1rem;
+    border-radius: 1rem !important;
 }
 
-body{
-    background: #efefef;
+.ant-layout{
+    background: #efefef !important;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+
 }

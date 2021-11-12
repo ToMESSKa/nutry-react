@@ -9,8 +9,7 @@ import LoadLogo from "../logo/LoadLogo";
 
 const cardForBar = {
     background: "white",
-    width: "200px",
-    minWidth: "200px",
+    minWidth: "150px",
     height: "100px",
     padding: "5px",
     display: "flex",

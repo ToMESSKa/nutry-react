@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import "antd/dist/custom-antd.css";
 import "antd/dist/antd.css";
+
 import { usePromiseTracker } from "react-promise-tracker";
 
 

@@ -9,3 +9,8 @@
   background: url("../foods.jpg");
   background-size: cover;
 }
+.main-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

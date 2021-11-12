@@ -19,9 +19,8 @@
 }
 
 .ant-layout-footer {
-    float: left;
+    float: left ;
+    background: #efefef;
+    margin-top: auto;
 }
 
-.app-footer{
-    background: #efefef;
-}
