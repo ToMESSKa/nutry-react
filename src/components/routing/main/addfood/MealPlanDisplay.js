@@ -76,16 +76,14 @@ function MealPlanDisplay(props) {
     }
   };
 
-  const getUserDetails = () => {
-    try {
-      axios.get(endpoint + "/getuserdata").then((response) => {
-        console.log(response.data)
-        setUserData(response.data);
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    const getUserDetails = () => {
+        const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+        axios
+            .get(endpoint + "/getuserdata", config)
+            .then((response) => {
+                setUserData(response.data);
+            });
+    };
 
   const countCalories = (response) => {
     const totalCalories = response.data.foods.reduce(
