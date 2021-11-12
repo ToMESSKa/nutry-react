@@ -73,7 +73,7 @@ function CustomNutrients(props) {
       openModal();props.updateCheckedNutrients()}}>Add new nutient</Button>
         {props.selectedNutrients.map((nutrient) => (
           <Row key={nutrient.nutrientName}>
-            {nutrient.nutrientName}, {nutrient.amount}
+            {nutrient.nutrientName}, {Math.round(nutrient.amount)} {nutrient.unitName}
           </Row>
         ))}
         <div>
