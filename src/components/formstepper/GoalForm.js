@@ -18,9 +18,9 @@ function GoalForm(props){
                     <Radio.Group
                         name="goal"
                         onChange={props.handleInput}>
-                        <Radio value="1"><OptionCard title="Maintenance" description="Maintanin your body weight." picturePath="https://www.precisionnutrition.com/hand_portion_calculator/assets/images/speedo3.svg"/></Radio>
-                        <Radio value="0.8"><OptionCard title="Fat Loss" description="Loose around 0.45 kg a week." picturePath="https://www.precisionnutrition.com/hand_portion_calculator/assets/images/speedo2.svg"/></Radio>
-                        <Radio value="0.65"><OptionCard title="Extreme Fat Loss" description="Loose around 0.9 kg a week (more than 1 kg could be unhealthy!)" picturePath="https://www.precisionnutrition.com/hand_portion_calculator/assets/images/speedo1.svg"/></Radio>
+                        <Radio value="1.3"><OptionCard title="Gain Muscle" description="Gain muscle - you need exercise as well :)" picturePath="https://www.precisionnutrition.com/hand_portion_calculator/assets/images/speedo3.svg"/></Radio>
+                        <Radio value="1"><OptionCard title="Maintenance" description="Maintanin your body weight." picturePath="https://www.precisionnutrition.com/hand_portion_calculator/assets/images/speedo2.svg"/></Radio>
+                        <Radio value="0.8"><OptionCard title="Fat Loss" description="Loose around 0.45 kg a week." picturePath="https://www.precisionnutrition.com/hand_portion_calculator/assets/images/speedo1.svg"/></Radio>
                     </Radio.Group>
                 </Form.Item>
             </Form>

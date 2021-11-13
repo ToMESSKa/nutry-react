@@ -177,9 +177,9 @@ function Profile({children}) {
                     ]}
                 >
                     <Select name="goal" placeholder="select your goal" onChange={handleGoalInput}>
+                        <Option name="goal" value="1.2">Gain Muscle</Option>
                         <Option name="goal" value="1">Maintenance</Option>
                         <Option name="goal" value="0.8">Fat Loss</Option>
-                        <Option name="goal" value="0.65">Extreme Fat Loss</Option>
                     </Select>
                 </Form.Item>
                 <Form.Item label="Weight"
