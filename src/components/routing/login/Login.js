@@ -67,18 +67,19 @@ function Login() {
                                 <Card>
                                     <Row>
                                         <Col span={22} offset={2} style={{height: 60}}>
-                                            <h4 align="left" className="login-form-title">About us</h4>
+                                            <h4 align="left" className="login-form-title">Calories and energy balance</h4>
                                         </Col>
                                     </Row>
                                     <Carousel autoplay>
                                         <Card style={{height: 300}}>
-                                            <p>Ez egy honlap amit mi csinaltunk Neked</p>
+                                            <p>When we eat and drink, we put energy into our bodies. Our bodies use up that energy through everyday movement, which includes everything from breathing to running.</p>
                                         </Card>
                                         <Card style={{height: 300}}>
-                                            <p>Itt mindent megtalalsz ami az egeszseges elethez kell</p>
+                                            <p>To maintain a stable weight, the energy we put into our bodies must be the same as the energy we use through normal bodily functions and physical activity.</p>
                                         </Card>
                                         <Card style={{height: 300}}>
-                                            <p>Es meg annal is tobbet a kajak tapanyagairol</p>
+                                            <p>An important part of a healthy diet is balancing the energy you put into your bodies with the energy you use. For example, the more physical activity we do, the more energy we use.
+                                                If you consume too much energy on 1 day, do not worry. Just try to take in less energy on the following days.</p>
                                         </Card>
                                     </Carousel>
                                 </Card>

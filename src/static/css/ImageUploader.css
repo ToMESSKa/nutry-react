@@ -3,4 +3,13 @@
   width: auto;
   max-width: 200px;
   max-height: 200px;
+  border-radius: 2rem;
+}
+
+.image-uploader{
+  float: bottom;
+}
+
+.uploader-col{
+  max-width: none;
 }

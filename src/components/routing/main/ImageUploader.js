@@ -64,14 +64,16 @@ const ImageUploader = () => {
 
 
   return (
-    <div className="App">
-      <div>
-        <Col span={6}>
+    <div className="image-uploader" style={{justifyContent:"center"}}>
+      <div style={{justifyContent:"center"}}>
+        <Col span={6}  className="uploader-col">
+          <div style={{height:"2rem"}}></div>
         <Row justify="center" >
-          <img className="profile-image" src={profileImage} alt="profielpic" />;
+          <img className="profile-image" src={profileImage} alt="profielpic" />
         </Row>
+          <div style={{height:"0.5rem"}}></div>
         <Row justify="center" >
-        <Button hidden={hidden} onClick={() => SetHidden(true)} >Update profile picture</Button>
+        <Button hidden={hidden} type="primary" onClick={() => SetHidden(true)} >Update profile picture</Button>
         </Row>
         {hidden === false ?
         <Row justify="center" >
@@ -80,12 +82,14 @@ const ImageUploader = () => {
           <Row justify="center" >
           <input ref={selectImage} type="file" style={browseButton}  onChange={onFileChange} />
           <Button onClick={(event) => handleClick(event)}>Select file...</Button>
-        </Row> 
+        </Row>
+            <div style={{height:"0.5rem"}}></div>
         <Row justify="center">
-          <Button onClick={uploadProfilePicture}>Upload!</Button>
+          <Button onClick={uploadProfilePicture} type="primary">Upload!</Button>
         </Row>
         </div>
       }
+          <div style={{height:"2rem"}}></div>
         </Col>
       </div>
     </div>
