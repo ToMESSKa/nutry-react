@@ -16,6 +16,7 @@ p{
 
 .ant-card{
     border-radius: 1rem !important;
+    min-height: 100%;
 }
 
 .ant-layout{
