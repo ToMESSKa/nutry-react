@@ -1,4 +1,4 @@
-import {Card, Space, Col, Row, Button, Divider} from "antd";
+import {Card, Space, Col, Row, Button, Divider, message} from "antd";
 import React, { useState, useEffect } from "react";
 import {useHistory} from "react-router-dom";
 import axios from "axios";
@@ -64,10 +64,14 @@ function MealPlanDisplay(props) {
           countCalories(response);
           setChartCardData(response.data.macroNutrients);
           getSelectedNutrients()
-        }).catch((error) => {
+        }).catch(async (error) => {
           switch (error.response.status) {
               case 403:
-                  console.log("ERROR 403 response")
+                  message.error("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                  await timeout(2000);
+                  history.push("/login");
+                  window.location.reload(false);
+                  break
               default:
                   break}
       }));
@@ -78,11 +82,26 @@ function MealPlanDisplay(props) {
 
     const getUserDetails = () => {
         const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+        try {
         axios
             .get(endpoint + "/getuserdata", config)
             .then((response) => {
                 setUserData(response.data);
-            });
+            }).catch(async (error) => {
+            switch (error.response.status) {
+                case 403:
+                    message.error("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                    await timeout(2000);
+                    history.push("/login");
+                    window.location.reload(false);
+                    break
+                default:
+                    break
+            }
+        });
+        } catch (err) {
+            console.log(err);
+        }
     };
 
   const countCalories = (response) => {
@@ -94,9 +113,9 @@ function MealPlanDisplay(props) {
     setTotalCalories(totalCalories);
   };
 
-  // function timeout(delay) {
-  //     return new Promise( res => setTimeout(res, delay) );
-  // }
+  function timeout(delay) {
+      return new Promise( res => setTimeout(res, delay) );
+  }
 
   const handleDateSelect = () => {
     const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
@@ -112,10 +131,10 @@ function MealPlanDisplay(props) {
         }).catch(async (error) => {
           switch (error.response.status) {
               case 403:
-                  alert("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
-                  // await timeout(1000);
-                  // history.push("/login");
-                  // window.location.reload(false);
+                  message.error("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                  await timeout(2000);
+                  history.push("/login");
+                  window.location.reload(false);
                   break
               // case 500:
               //     alert("Oops! Something went wrong!\n Please come back later!" +  "ERROR " + error.response.status);
@@ -146,10 +165,14 @@ function MealPlanDisplay(props) {
             countCalories(response);
             setChartCardData(response.data.macroNutrients);
             getSelectedNutrients()
-          }).catch((error) => {
+          }).catch(async (error) => {
             switch (error.response.status) {
                 case 403:
-                    console.log("ERROR 403 response")
+                    message.error("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                    await timeout(2000);
+                    history.push("/login");
+                    window.location.reload(false);
+                    break
                 default:
                     break}
         });
@@ -172,10 +195,14 @@ function MealPlanDisplay(props) {
             setChartCardData(response.data.macroNutrients);
             countCalories(response);
             getSelectedNutrients()
-          }).catch((error) => {
+          }).catch(async (error) => {
             switch (error.response.status) {
                 case 403:
-                    console.log("ERROR 403 response")
+                    message.error("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                    await timeout(2000);
+                    history.push("/login");
+                    window.location.reload(false);
+                    break
                 default:
                     break}
         });
@@ -202,10 +229,14 @@ function MealPlanDisplay(props) {
             setChartCardData(response.data.macroNutrients);
             countCalories(response);
             getSelectedNutrients();
-          }).catch((error) => {
+          }).catch(async (error) => {
             switch (error.response.status) {
                 case 403:
-                    console.log("ERROR 403 response")
+                    message.error("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                    await timeout(2000);
+                    history.push("/login");
+                    window.location.reload(false);
+                    break
                 default:
                     break}
         });

@@ -1,37 +1,81 @@
-import {Button, DatePicker, Form, Input, message, Select} from "antd";
+import {Button, Col, DatePicker, Form, Input, message, Select} from "antd";
 import React, {useEffect, useState} from "react";
-import {} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import ImageUploader from "../../routing/main/ImageUploader"
 import axios from "axios";
 import {trackPromise, usePromiseTracker} from "react-promise-tracker";
+import * as events from "events";
 const { Option } = Select;
 
-function Profile({ children }) {
+function Profile({children}) {
     const endpoint = process.env.REACT_APP_API_ENDPOINT;
-    const [userProfileDetails, setUserProfileDetails] = useState({});
+    const [isLoading, setLoading] = useState(true);
+    const [userProfileDetails, setUserProfileDetails] = useState({
+        userName: "",
+        weight: 0,
+        height: 0,
+        gender: 0.0,
+        activity: 0.0,
+        goal: 0.0,
+        genderinit: "",
+        activityinit: "",
+        goalinit: "",
+        birthdate: ""
+    });
 
-    useEffect( () => {
-        getUserProfileDetails();
-    },[]);
+    let history = useHistory();
 
-    const getUserProfileDetails = () => {
-        const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
-            axios.get(endpoint + "/getuserprofiledetails", config)
-                .then((response) => {
+    function timeout(delay) {
+        return new Promise( res => setTimeout(res, delay) );
+    }
+
+
+    useEffect( () => {const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
+        axios.get(endpoint + "/getuserprofiledetails", config)
+            .then((response) => {
                 console.log(response.data)
+                const userDetails = response.data;
                 setUserProfileDetails(response.data);
+                console.log(userProfileDetails);
+
+                console.log(userProfileDetails.goal);
+                console.log(userProfileDetails.activity);
+                console.log(userProfileDetails.gender)
+
+                setLoading(false)
+            }).catch(async (error) => {
+            switch (error.response.status) {
+                case 403:
+                    message.error("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                    await timeout(2000);
+                    history.push("/login");
+                    window.location.reload(false);
+                    break
+                default:
+                    break}
             });
-    };
+    }, []);
+
 
     const updateUserDetails = () => {
         const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
 
-            axios.post(endpoint + "/updateuserdetails", userProfileDetails, config)
-                .then((response) => {})
+            axios.post(endpoint + "/updateuserprofiledetails", userProfileDetails, config)
+                .then((response) => {}).catch(async (error) => {
+                switch (error.response.status) {
+                    case 403:
+                        message.error("Not authenticated, please log in!\n" + "ERROR " + error.response.status);
+                        await timeout(2000);
+                        history.push("/login");
+                        window.location.reload(false);
+                        break
+                    default:
+                        break}})
             console.log(userProfileDetails);
         };
 
     const onFinish = (values) => {
+        updateUserDetails(userProfileDetails);
         console.log('Success:', values);
     };
 
@@ -43,6 +87,7 @@ function Profile({ children }) {
         setUserProfileDetails({ ...userProfileDetails, [event.target.name]: event.target.value });
         console.log(event.target.value);
         console.log(event.target.name);
+        console.log(userProfileDetails);
     };
 
     const handleGenderInput = (selected) =>{
@@ -60,13 +105,14 @@ function Profile({ children }) {
         console.log(userProfileDetails.goal);
     };
 
-
+    if (isLoading) {
+        return <div className="profile">Loading...</div>;
+    }
 
     return (
-
         <div className="profile">
-
-            <Form>
+            <Col span={10} offset={7}>
+            <Form
                 labelCol={{
                 span: 5,
             }}
@@ -78,24 +124,16 @@ function Profile({ children }) {
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
                 initialValues={{
-                username: userProfileDetails.username,
                 weight: userProfileDetails.weight,
                 height: userProfileDetails.height,
-                gender: userProfileDetails.gender,
-                activity: userProfileDetails.activity,
-                goal: userProfileDetails.goal
+                gender: userProfileDetails.genderinit,
+                activity: userProfileDetails.activityinit,
+                goal: userProfileDetails.goalinit
             }}>
                 <ImageUploader></ImageUploader>
                 {children}
-
-                <Form.Item label="Nickname"
-                           name="username"
-                           rules={[{required: true, message: 'Please input your name!'}]}>
-                    <Input
-                        name="username"
-                        onChange={handleInput}/>
-                </Form.Item>
                 <Form.Item
+                    shouldUpdate
                     name="gender"
                     label="Gender"
                     rules={[
@@ -105,7 +143,7 @@ function Profile({ children }) {
                         },
                     ]}
                 >
-                    <Select name="gender" placeholder="select your gender" onChange={handleGenderInput}>
+                    <Select  name="gender" placeholder="select your gender" onChange={handleGenderInput}>
                         <Option name="gender" value="0">Male</Option>
                         <Option name="gender" value="166">Female</Option>
                         <Option name="gender" value="83">Other</Option>
@@ -168,13 +206,14 @@ function Profile({ children }) {
                 </Form.Item>
                 <Form.Item label=" " colon={false}>
                     <Button type="primary" htmlType="submit" onClick={() => {
-                        updateUserDetails(userProfileDetails);
+
                         message.success("Processing complete!");
                     }}>
                         Submit
                     </Button>
                 </Form.Item>
             </Form>
+            </Col>
         </div>
     );
 }
