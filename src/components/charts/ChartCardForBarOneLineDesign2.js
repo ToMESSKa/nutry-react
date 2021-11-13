@@ -4,7 +4,7 @@ import BarChartOneLine from "./BarChartOneLine";
 import {Card, Space, Col, Row, Button } from "antd";
 import { trackPromise } from 'react-promise-tracker';
 import { usePromiseTracker } from "react-promise-tracker";
-import Logo from "../../components/logo/Logo"
+import Logo from "../logo/Logo"
 import LoadLogo from "../logo/LoadLogo";
 
 const cardForBar = {
@@ -28,7 +28,7 @@ function ChartCardForBar({children, chartCardData}) {
            <LoadLogo/>
             :
             <div style={{width:"85%"}}>
-      <h4>{chartCardData.icon} { Math.round(chartCardData.amount)} / {chartCardData.label==="WATER"?"3l": Math.round(chartCardData.recommended) + " g"}</h4>
+      <h4>{chartCardData.icon} { Math.round(chartCardData.amount)}{chartCardData.label==="WATER"?" l" :" g"}</h4>
       <div>{chartCardData.label}</div>
       {children}
       </div>

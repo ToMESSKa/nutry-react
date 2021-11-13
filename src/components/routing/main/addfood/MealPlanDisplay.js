@@ -12,7 +12,7 @@ import moment from "moment";
 import CardForChartBarSingle from "../../../common/CardForChartBarSingle";
 import ChartBarSingle from "../../../charts/ChartBarSingle";
 import BarChartOneLine from "../../../charts/BarChartOneLine";
-import ChartCardForBarOneLine from "../../../charts/ChartCardForBarOneLine";
+import ChartCardForBarOneLineDesign2 from "../../../charts/ChartCardForBarOneLineDesign2";
 import { GiWheat, GiGlassShot, GiBiceps } from "react-icons/gi";
 import { ImDroplet } from "react-icons/im";
 import { trackPromise } from 'react-promise-tracker';
@@ -20,6 +20,7 @@ import { usePromiseTracker } from "react-promise-tracker";
 import CustomNutrients from "./CustomNutrients";
 import LoadLogo from "../../../logo/LoadLogo";
 import BarChartAntDesign from "../../../charts/BarChartAntDesign";
+import ChartCardForBar from "../../../charts/ChartCardForBarOneLine";
 
 
 
@@ -212,6 +213,7 @@ function MealPlanDisplay(props) {
                     break}
         });
       });
+
   };
 
 
@@ -270,6 +272,9 @@ function MealPlanDisplay(props) {
   function onChange(checkedValues) {
     setCheckedValues(checkedValues)
   }
+
+
+  
 
   const macroNutrientsContainer = {
     display: "flex",
@@ -339,50 +344,53 @@ function MealPlanDisplay(props) {
 
         <Row className="macroNutrientsContainer" gutter={[10,20]} >
             <Col flex="25%">
-            <ChartCardForBarOneLine
+            <ChartCardForBarOneLineDesign2
               chartCardData={{
                 amount: chartCardData["carbohydrate"],
                 label: "CARBOHYDRATE",
                 icon: <GiWheat />,
                 color: "#FFBB28",
+                recommended: 65
               }}>
               <BarChartAntDesign
-                data={{color: "#FF8042", amount: chartCardData["carbohydrate"], recommended:100,
+                data={{color: "#FF8042", amount: chartCardData["carbohydrate"], recommended:65,
                 }}>
               </BarChartAntDesign>
-            </ChartCardForBarOneLine>
+            </ChartCardForBarOneLineDesign2>
             </Col>
             <Col flex="25%">
-            <ChartCardForBarOneLine
+            <ChartCardForBarOneLineDesign2
               chartCardData={{
                 amount: chartCardData["protein"],
                 label: "PROTEIN",
                 icon: <GiBiceps />,
                 color: "#00C49F",
+                recommended: 265,
               }}
             >
               <BarChartAntDesign
-                data={{ color: "#00C49F", amount: chartCardData["protein"], recommended:100, }}
+                data={{ color: "#00C49F", amount: chartCardData["protein"], recommended:265, }}
               ></BarChartAntDesign>
-            </ChartCardForBarOneLine>
+            </ChartCardForBarOneLineDesign2>
             </Col>
         <Col flex="25%">
-            <ChartCardForBarOneLine
+            <ChartCardForBarOneLineDesign2
               chartCardData={{
                 amount: chartCardData["fat"],
                 label: "FAT",
                 icon: <ImDroplet />,
                 color: "#FFBB28",
+                recommended: 71,
               }}
             >
               <BarChartAntDesign
-                data={{ color: "#FFBB28", amount: chartCardData["fat"], recommended:100, }}
+                data={{ color: "#FFBB28", amount: chartCardData["fat"], recommended:71, }}
               ></BarChartAntDesign>
-            </ChartCardForBarOneLine>
+            </ChartCardForBarOneLineDesign2>
         </Col>
 
         <Col flex="25%">
-            <ChartCardForBarOneLine
+            <ChartCardForBarOneLineDesign2
               chartCardData={{
                 amount: chartCardData["fat"],
                 label: "WATER",
@@ -393,7 +401,7 @@ function MealPlanDisplay(props) {
               <BarChartAntDesign
                 data={{ color: "#0088FE", amount: chartCardData["fat"], recommended:100, }}
               ></BarChartAntDesign>
-            </ChartCardForBarOneLine>
+            </ChartCardForBarOneLineDesign2>
         </Col>
           </Row>
           

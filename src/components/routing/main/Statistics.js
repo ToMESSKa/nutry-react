@@ -58,8 +58,9 @@ function Statistics({ children }) {
   };
 
   const getAvgMacroNutrients = (period) => {
+    const config = {headers: {Authorization:`Bearer ${localStorage.getItem("token")}`}};
     axios
-      .post(endpoint + "/get-avg-macronutrients-for-period", period)
+      .post(endpoint + "/get-avg-macronutrients-for-period", period, config)
       .then((response) => {
         setAvgMacroNutrients({ ...response.data });
       });
@@ -87,8 +88,7 @@ function Statistics({ children }) {
   return (
     <Col>
       <DividedLayout>
-        <LeftColumn></LeftColumn>
-        <RightColumn>
+        <Col offset={4} span={16}>
           <Row>
             <Radio.Group value={"large"}>
               <Radio.Button
@@ -117,65 +117,65 @@ function Statistics({ children }) {
           <Row>
             <p></p>
           </Row>
-          <Row gutter={[40, 40]}>
-            <Col>
+          <Row gutter={[10, 20]}>
+            <Col flex="25%">
               <ChartCardForBarOneLine
                 chartCardData={{
                   amount: avgMacroNutrients["carbohydrate"],
                   label: "CARBOHYDRATE",
                   icon: <GiWheat/>,
-                    color: "#FFBB28",
+                    recommended: avgMacroNutrients["carbohydrateRecommended"],
                 }}
               >
                 <BarChartAntDesign
                   data={{
                     color: "#FF8042",
                     amount: avgMacroNutrients["carbohydrate"],
-                    recommended: 100,
+                    recommended: avgMacroNutrients["carbohydrateRecommended"],
                   }}
                 ></BarChartAntDesign>
               </ChartCardForBarOneLine>
             </Col>
 
-            <Col>
+            <Col flex="25%">
               <ChartCardForBarOneLine
                 chartCardData={{
                   amount: avgMacroNutrients["protein"],
                   label: "PROTEIN",
                   icon: <GiBiceps />,
-                    color: "#00C49F",
+                    recommended: avgMacroNutrients["proteinRecommended"],
                 }}
               >
                 <BarChartAntDesign
                   data={{
                     color: "#00C49F",
                     amount: avgMacroNutrients["protein"],
-                    recommended: 100,
+                    recommended: avgMacroNutrients["proteinRecommended"],
                   }}
                 ></BarChartAntDesign>
               </ChartCardForBarOneLine>
             </Col>
 
-            <Col>
+            <Col flex="25%">
               <ChartCardForBarOneLine
                 chartCardData={{
                   amount: avgMacroNutrients["fat"],
                   label: "FAT",
                   icon: <ImDroplet />,
-                    color: "#FFBB28",
+                    recommended: avgMacroNutrients["fatRecommended"],
                 }}
               >
                 <BarChartAntDesign
                   data={{
                     color: "#FFBB28",
                     amount: avgMacroNutrients["fat"],
-                    recommended: 100,
+                    recommended: avgMacroNutrients["fatRecommended"],
                   }}
                 ></BarChartAntDesign>
               </ChartCardForBarOneLine>
             </Col>
 
-            <Col>
+            <Col flex="25%">
               <ChartCardForBarOneLine
                 chartCardData={{
                   amount: 2,
@@ -198,8 +198,8 @@ function Statistics({ children }) {
 
           <Row></Row>
 
-          <Row gutter={[40, 40]}>
-            <Col>
+          <Row gutter={[10, 20]}>
+            <Col flex="33%" align="middle">
               <CardForCharts
                 cardData={{
                   label: "Energy History (kcal)",
@@ -212,7 +212,7 @@ function Statistics({ children }) {
               </CardForCharts>
             </Col>
 
-            <Col>
+            <Col flex="33%" align="middle">
               <CardForCharts
                 cardData={{
                   label: "Weight Change (kg)",
@@ -222,7 +222,7 @@ function Statistics({ children }) {
               </CardForCharts>
             </Col>
 
-            <Col>
+            <Col flex="33%" align="middle">
               <CardForCharts
                 cardData={{
                   label: "Water Consumption (l)",
@@ -240,7 +240,7 @@ function Statistics({ children }) {
           <Row>
             <TableNutrients tableData={avgNutrients}></TableNutrients>
           </Row>
-        </RightColumn>
+        </Col>
       </DividedLayout>
     </Col>
   );

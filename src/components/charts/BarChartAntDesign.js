@@ -4,7 +4,7 @@ import { Progress } from 'antd';
 function BarChartAntDesign(props) {
     return (
         <div className="calories-bar">
-            <Progress percent={parseInt(props.data.amount)} strokeColor={props.data.color} showInfo={false}/>
+            <Progress percent={parseInt(props.data.amount / props.data.recommended * 100) } strokeColor={props.data.color} showInfo={false}/>
         </div>
     );
 }

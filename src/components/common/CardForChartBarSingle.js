@@ -38,7 +38,7 @@ function CardForChartBarSingle({ children, chartCardData }) {
       </div>
       {children}
       <div style={cardLabelContainer}>
-        <p style={cardLabel}>{Math.round(chartCardData.amount)} / {chartCardData.label==="WATER"?"3l":"100g"}</p>
+        <p style={cardLabel}>{Math.round(chartCardData.amount)}/{chartCardData.label==="WATER"?"3l": Math.round(chartCardData.recommended) + " g"}</p>
       </div>
       
     </div>
