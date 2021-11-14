@@ -93,7 +93,9 @@ function CustomNutrients(props) {
         ariaHideApp={false}
       >
         <div>
+        <br />
         <Checkbox.Group options={options} value={props.checkedValues} onChange={props.onChange} />
+        <br />
         </div>
     <Button onClick={() =>{
       props.selectCustomNutrients(); 
