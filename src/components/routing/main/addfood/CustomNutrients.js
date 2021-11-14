@@ -20,6 +20,13 @@ function CustomNutrients(props) {
     { label: 'Calcium', value: "1087", key: "1087" },
     { label: 'Magnesium', value: "1090", key: "1090" },
     { label: 'Iron', value: "1089", key: "1089" },
+    { label: "Fiber", value: "1079", key: "1079"},
+    { label: "Phosphorus", value: "1091", key: "1091"},
+    { label: "Potassium", value: "1092", key: "1092"},
+    { label: "Zinc", value: "1095", key: "1095"},
+    { label: "Vitamin A", value: "1106", key: "1106"},
+    { label: "Vitamin D", value: "1114", key: "1114"},
+    { label: "Vitamin B12", value: "1246", key: "1246"},
   ];
 
 
